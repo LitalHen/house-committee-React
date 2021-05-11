@@ -1,3 +1,4 @@
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { HashRouter, Route } from 'react-router-dom';
@@ -7,22 +8,58 @@ import LogIn from './pages/LogIn';
 import LogOut from './pages/LogOut';
 import SignUp from './pages/SignUp';
 import HomePage from './pages/HomepAge';
-function App() {
+import usersJSON from './data/users.json';
+
+class App extends React.Component{
+  constructor(props){
+    super(props);
+
+    this.state={
+      buildingUsers:usersJSON,
+      activeUser:{
+        name: "lital",
+        email: "lital@gmail.com",
+        pwd: "123"
+      }
+    }
+  }
+
+
+  addUser = (newUser) =>{
+      this.setState({
+        buildingUsers:this.state.buildingUsers.concat(newUser)
+      })
+  }
+
+  render(){
   return (
     <div>
       <HashRouter>
         <Container>
         <Route exact path={['/','/messages']}>
-          <ManagementNavbar></ManagementNavbar>
+          <ManagementNavbar
+          activeUser={this.state.activeUser}
+          >
+          </ManagementNavbar>
         </Route>
         <Route exact path='/login'>
-          <LogIn></LogIn>
+          <LogIn
+           activeUser={this.state.activeUser}
+           >
+           </LogIn>
         </Route>
         <Route exact path='/logout'>
-          <LogOut></LogOut>
+          <LogOut 
+           activeUser={this.state.activeUser}
+           >
+           </LogOut>
         </Route>
         <Route exact path='/signup'>
-          <SignUp></SignUp>
+          <SignUp
+           activeUser={this.state.activeUser}
+           addUser={this.addUser}
+           >
+           </SignUp>
         </Route>
         <Route exact path='/'>
          <HomePage></HomePage>
@@ -30,7 +67,8 @@ function App() {
         </Container>
       </HashRouter>
     </div>
-  );
+  )
+  }
 }
 
 export default App;
