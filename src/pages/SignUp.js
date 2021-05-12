@@ -20,6 +20,28 @@ class SignUp extends React.Component{
             [key] : val
         })
     }
+
+    signUp = () => {
+
+        const newUserObj={
+
+            name: this.state.name,
+            email: this.state.email,
+            pwd: this.state.pwd,
+            address: this.state.address,
+            communityName: this.state.communityName
+        }
+
+        this.props.addUser(newUserObj);
+        this.setState={
+            name:'',
+            email:'',
+            pwd:'',
+            address:'',
+            communityName:''
+        }
+    }
+
 render(){
 
     return(
@@ -48,6 +70,7 @@ render(){
                     <Form.Label>building community name</Form.Label>
                     <Form.Control type="text"  onChange={(event)=>{this.formInput("communityName",event.target.value)}}placeholder="community name" />
                 </Form.Group>
+               
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Full address</Form.Label>
                     <Form.Control type="text"  onChange={(event)=>{this.formInput("address",event.target.value)}}placeholder="address" />
@@ -55,7 +78,7 @@ render(){
                 {/* <Form.Group controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group> */}
-                <Button variant="success" type="button">
+                <Button variant="success" type="button" onClick={this.signUp}>
                     create account!
                 </Button>
             </Form>

@@ -16,7 +16,14 @@ class App extends React.Component{
 
     this.state={
       buildingUsers:usersJSON,
-      activeUser:{
+      activeManagerUser:{
+        name: "lital",
+        email: "lital@gmail.com",
+        pwd: "123",
+        address:'test 2',
+        communityName:'Hertzel'
+      },
+      activeTenantUser:{
         name: "lital",
         email: "lital@gmail.com",
         pwd: "123"
