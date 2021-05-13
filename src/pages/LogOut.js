@@ -1,13 +1,27 @@
 import React from 'react'
+import { Jumbotron } from 'react-bootstrap';
 
 class LogOut extends React.Component{
 
     constructor(props){
         super(props);
+    
     }
+
+    logout = () => {
+        this.props.logout()
+    }
+
 render(){
+
+   
+    
     return(
-        <div></div>
+        <div>
+            <Jumbotron>
+            See you soon!...
+            </Jumbotron>
+        </div>
     )
 }
     

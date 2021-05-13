@@ -51,8 +51,7 @@ class App extends React.Component{
     })
   }
 
-  login = (userObj) =>{
-
+  login = (userObj) => {
     this.setState({
       activeUser:userObj
     })
@@ -74,6 +73,7 @@ class App extends React.Component{
           <Route exact path='/login'>
             <LogIn
             buildingUsers={this.state.buildingUsers}
+            login={this.login}
             >
            </LogIn>
         </Route>

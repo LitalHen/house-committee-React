@@ -17,21 +17,21 @@ class LogIn extends React.Component{
 
 
     formInput = (key, val) => {
-        this.setState={
+        this.setState({
             [key]:val
-        }
+        })
     }
 
-    login= () => {
+    login = () => {
 
         const userExist=this.props.buildingUsers.find((user) => {
             return this.state.email === user.email && this.state.pwd === user.pwd
         })
 
         if (userExist){
-            this.props.login(userExist)
+            this.props.login(userExist);
             //close modal
-            window.location.href="/homepage"
+            window.location.href="/#/homepage"
             this.setState({
                 errMessage:''
             })
@@ -39,7 +39,7 @@ class LogIn extends React.Component{
         else{
 
             this.setState({
-                errMessage:'email or password incurrect, please check with your homeowner association committee'
+                errMessage:'email or password incurrect please check with your homeowner association committee'
             })
 
         }
@@ -56,27 +56,23 @@ render(){
             {/* //create modal */}
             <Form>
                 <Form.Group>
-                    <Form.Label>Name</Form.Label>
-                        <Form.Control type="text" onChange={(event)=>{this.formInput("name",event.target.value)}}placeholder="Enter full name" />
+                    <Form.Label>Email</Form.Label>
+                        <Form.Control type="text" onChange={(event)=>{this.formInput("Email",event.target.value)}}placeholder="Enter Email" />
                     </Form.Group>
 
                 <Form.Group>
-                    <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" onChange={(event)=>{this.formInput("email",event.target.value)}}placeholder="Enter Email" />
+                    <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" onChange={(event)=>{this.formInput("pwd",event.target.value)}}placeholder="Enter Password" />
                     </Form.Group>
 
                 <Button variant="success" type="button" onClick={this.login}>
                    Login
                 </Button>
             </Form>
-            <div>{this.state.errMessage}</div>
-            
-            {/* <Alert variant="success">
-                <Alert.Heading>Error message</Alert.Heading>
-                <p>
+            <div style={{color:"red"}}>
                 {this.state.errMessage}
-                </p>
-                </Alert> */}
+
+                </div>
         </div>
     )
 }
