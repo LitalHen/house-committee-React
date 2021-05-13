@@ -31,14 +31,14 @@ class TenantsAccount extends React.Component{
         if (userExist){
             this.setState({
                     errMessage :"user already exist, check tenants list"
-                });
+                })
                 return 
             }
             else{
 
                 this.setState(
                     {
-                        errMessage :''
+                        errMessage:''
                     })
                     
                 }
@@ -55,12 +55,12 @@ class TenantsAccount extends React.Component{
 
         this.props.addUser(newUserObj)
         
-        this.setState={
+        this.setState({
             name:'',
             email:'',
-            aptNumer:'',
+            aptNumber:'',
             
-        }
+        })
         
     }
     
@@ -81,17 +81,17 @@ class TenantsAccount extends React.Component{
                     <Form>
                     <Form.Group>
                         <Form.Label>Name</Form.Label>
-                        <Form.Control type="text" value={this.state.name} onChange={(event)=>{this.formInput("name",event.target.value)}}placeholder="Enter full name" />
+                        <Form.Control  value={this.state.name} type="text" onChange={(event)=>{this.formInput("name",event.target.value)}}placeholder="Enter full name" />
                     </Form.Group>
                     
                     <Form.Group>
                         <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" onChange={(event)=>{this.formInput("email",event.target.value)}}placeholder="Enter Email" />
+                        <Form.Control value={this.state.email} type="email" onChange={(event)=>{this.formInput("email",event.target.value)}}placeholder="Enter Email" />
                     </Form.Group>
                     
                     <Form.Group>
                         <Form.Label>Apartement Number</Form.Label>
-                        <Form.Control type="text" onChange={(event)=>{this.formInput("aptNumber",event.target.value)}}placeholder="Enter apartement number" />
+                        <Form.Control  value={this.state.aptNumber} type="text" onChange={(event)=>{this.formInput("aptNumber",event.target.value)}}placeholder="Enter apartement number" />
                     </Form.Group>
                     
                     <Button variant="success" type="button" onClick={this.addTenants}>create tenant account!</Button>

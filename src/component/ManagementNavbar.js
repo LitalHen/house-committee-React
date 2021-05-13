@@ -13,6 +13,7 @@ render(){
         const login=(!this.props.activeUser)? <Nav.Link to="/#/login">Login</Nav.Link>:null
         const signup=(this.props.activeUser.owner && !this.props.activeUser)? <Nav.Link to="/#/signup">Signup</Nav.Link>: null
         const userName=(this.props.activeUser)?<Nav.Link>{this.props.activeUser.name}</Nav.Link>:null
+        const messages=(this.props.activeUser)?<Nav.Link to="/#/messages">Messages</Nav.Link>:null
         const tenantsAccount=(this.props.activeUser.owner)?<Nav.Link to="/#/tenants-accounts">Tenants account</Nav.Link>:null
     return(   
 
@@ -23,6 +24,7 @@ render(){
                 <Nav className="mr-auto">
                    {signup}
                    {tenantsAccount}
+                   {messages}
                 </Nav>
                 <Nav className="ml-auto">
                     {userName}

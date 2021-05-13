@@ -8,7 +8,9 @@ import LogOut from './pages/LogOut';
 import SignUp from './pages/SignUp';
 import HomePage from './pages/HomePage';
 import usersJSON from './data/users.json';
+import messagesJSON from './data/messages.json';
 import TenantsAccount from './pages/TenantsAccount';
+import Messages from './component/Messages';
 
 class App extends React.Component{
   constructor(props){
@@ -16,6 +18,7 @@ class App extends React.Component{
 
     this.state={
       buildingUsers:usersJSON,
+      messages:messagesJSON,
       activeUser:{
         name: "lital hen",
         email: "lital@gmail.com",
@@ -34,6 +37,12 @@ class App extends React.Component{
     }
   }
 
+  addMessage = (newMessage) =>{
+    this.setState({
+      messages:this.state.messages.concat(newMessage)
+    })
+
+}
 
   addUser = (newUser) =>{
       this.setState({
@@ -93,7 +102,15 @@ class App extends React.Component{
            >
            </SignUp>
         </Route>
+        <Route exact path='/messages'>
+          <Messages
+           buildingUsers={this.state.buildingUsers}
+           activeUser={this.state.activeUser}
+           >
+           </Messages>
+        </Route>
 
+       
         <Route exact path='/tenants-accounts'>
           <TenantsAccount
            addUser={this.addUser}
