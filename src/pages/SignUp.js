@@ -1,5 +1,6 @@
+import { Button } from 'bootstrap';
 import React from 'react'
-import { Jumbotron } from 'react-bootstrap';
+import { Form, Jumbotron } from 'react-bootstrap';
 
 class SignUp extends React.Component{
 
@@ -29,17 +30,20 @@ class SignUp extends React.Component{
             email: this.state.email,
             pwd: this.state.pwd,
             address: this.state.address,
-            communityName: this.state.communityName
+            communityName: this.state.communityName,
+            owner: true
+
         }
 
         this.props.addUser(newUserObj);
-        this.setState={
+        
+        this.setState({
             name:'',
             email:'',
             pwd:'',
             address:'',
-            communityName:''
-        }
+            communityName:''       
+        })
     }
 
 render(){
@@ -53,7 +57,7 @@ render(){
             <Form>
                 <Form.Group controlId="formBasicEmail">
                 <Form.Label>Name</Form.Label>
-                    <Form.Control type="email" onChange={(event)=>{this.formInput("name",event.target.value)}}placeholder="Enter full name" />
+                    <Form.Control type="text" onChange={(event)=>{this.formInput("name",event.target.value)}}placeholder="Enter full name" />
                 </Form.Group>
                 
                 <Form.Group controlId="formBasicEmail">

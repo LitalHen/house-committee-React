@@ -1,14 +1,14 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
 import { HashRouter, Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import ManagementNavbar from './component/ManagementNavbar';
 import LogIn from './pages/LogIn';
 import LogOut from './pages/LogOut';
 import SignUp from './pages/SignUp';
-import HomePage from './pages/HomepAge';
+import HomePage from './pages/HomePage';
 import usersJSON from './data/users.json';
+import TenantsAccount from './pages/TenantsAccount';
 
 class App extends React.Component{
   constructor(props){
@@ -16,18 +16,21 @@ class App extends React.Component{
 
     this.state={
       buildingUsers:usersJSON,
-      activeManagerUser:{
-        name: "lital",
+      activeUser:{
+        name: "lital hen",
         email: "lital@gmail.com",
         pwd: "123",
         address:'test 2',
-        communityName:'Hertzel'
+        communityName:'Hertzel',
+        owner:true
       },
-      activeTenantUser:{
-        name: "lital",
-        email: "lital@gmail.com",
-        pwd: "123"
-      }
+      // activeUser:{
+      //   name: "lital",
+      //   email: "lital@gmail.com",
+      //   pwd: "123",
+      //   owner: false,
+      //   aptNumber: "7"
+      // }
     }
   }
 
@@ -36,6 +39,23 @@ class App extends React.Component{
       this.setState({
         buildingUsers:this.state.buildingUsers.concat(newUser)
       })
+      if (newUser.owner){
+        this.setState({
+          activeUser: newUser
+        })
+      }
+  }
+  logout= () =>{
+    this.setState({
+      activeUser:null
+    })
+  }
+
+  login = (userObj) =>{
+
+    this.setState({
+      activeUser:userObj
+    })
   }
 
   render(){
@@ -43,34 +63,49 @@ class App extends React.Component{
     <div>
       <HashRouter>
         <Container>
-        <Route exact path={['/','/messages']}>
-          <ManagementNavbar
-          activeUser={this.state.activeUser}
-          >
-          </ManagementNavbar>
-        </Route>
-        <Route exact path='/login'>
-          <LogIn
-           activeUser={this.state.activeUser}
-           >
+
+          <Route exact path={['/','/messages']}>
+            <ManagementNavbar
+            activeUser={this.state.activeUser}
+            >
+            </ManagementNavbar>
+          </Route>
+         
+          <Route exact path='/login'>
+            <LogIn
+            buildingUsers={this.state.buildingUsers}
+            >
            </LogIn>
         </Route>
-        <Route exact path='/logout'>
-          <LogOut 
-           activeUser={this.state.activeUser}
+
+          <Route exact path='/logout'>
+           <LogOut 
+           logout={this.logout}
            >
            </LogOut>
         </Route>
+
         <Route exact path='/signup'>
           <SignUp
            activeUser={this.state.activeUser}
            addUser={this.addUser}
+           buildingUsers={this.state.buildingUsers}
            >
            </SignUp>
         </Route>
+
+        <Route exact path='/tenants-accounts'>
+          <TenantsAccount
+           addUser={this.addUser}
+           buildingUsers={this.state.buildingUsers}
+           >
+           </TenantsAccount>
+        </Route>
+
         <Route exact path='/'>
          <HomePage></HomePage>
         </Route>
+
         </Container>
       </HashRouter>
     </div>

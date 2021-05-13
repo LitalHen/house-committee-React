@@ -3,9 +3,18 @@
         "name":"lital",
         "email":"lital@gmail.com",
         "pwd":"123",
-        "owner":"true",
+        "owner":true,
         "address":"test 2",
         "communityName":"Hertzel"
+    },
+
+
+    {
+        "name":"lital",
+        "email":"lital@gmail.com",
+        "pwd":"123",
+        "owner":false,
+        "aptNumber":"7"
 
     }
 ]
