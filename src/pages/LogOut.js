@@ -14,8 +14,7 @@ class LogOut extends React.Component{
 
 render(){
 
-   
-    
+    {this.props.logout()}
     return(
         <div>
             <Jumbotron>

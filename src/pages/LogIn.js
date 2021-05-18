@@ -39,7 +39,7 @@ class LogIn extends React.Component{
         else{
 
             this.setState({
-                errMessage:'email or password incurrect please check with your homeowner association committee'
+                errMessage:'email or password incurrect please check with your building committee'
             })
 
         }

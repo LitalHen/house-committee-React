@@ -6,17 +6,20 @@ import ManagementNavbar from './component/ManagementNavbar';
 import LogIn from './pages/LogIn';
 import LogOut from './pages/LogOut';
 import SignUp from './pages/SignUp';
+import DashboardMessages from './component/DashboardMessages';
 import HomePage from './pages/HomePage';
 import usersJSON from './data/users.json';
 import messagesJSON from './data/messages.json';
 import TenantsAccount from './pages/TenantsAccount';
 import Messages from './component/Messages';
+import commentsJSON from './data/comments.json';
 
 class App extends React.Component{
   constructor(props){
     super(props);
 
     this.state={
+      comments:commentsJSON,
       buildingUsers:usersJSON,
       messages:messagesJSON,
       activeUser:{
@@ -36,6 +39,12 @@ class App extends React.Component{
       // }
     }
   }
+  
+  addComments = (newCommment) => {
+    this.setState({
+      comments: this.state.comments.concat(newCommment)
+    })
+  }
 
   addMessage = (newMessage) =>{
     this.setState({
@@ -54,7 +63,8 @@ class App extends React.Component{
         })
       }
   }
-  logout= () =>{
+
+  logout = () => {
     this.setState({
       activeUser:null
     })
@@ -72,49 +82,56 @@ class App extends React.Component{
       <HashRouter>
         <Container>
 
-          <Route exact path={['/','/messages']}>
+          <Route exact path={['/','/messages','/tenants-accounts']}>
             <ManagementNavbar
-            activeUser={this.state.activeUser}
+              activeUser={this.state.activeUser}
+              logout={this.logout}
+
             >
             </ManagementNavbar>
           </Route>
          
           <Route exact path='/login'>
             <LogIn
-            buildingUsers={this.state.buildingUsers}
-            login={this.login}
+              buildingUsers={this.state.buildingUsers}
+              login={this.login}
             >
            </LogIn>
         </Route>
 
-          <Route exact path='/logout'>
-           <LogOut 
-           logout={this.logout}
-           >
-           </LogOut>
-        </Route>
-
         <Route exact path='/signup'>
           <SignUp
-           activeUser={this.state.activeUser}
-           addUser={this.addUser}
-           buildingUsers={this.state.buildingUsers}
+              activeUser={this.state.activeUser}
+              addUser={this.addUser}
+              buildingUsers={this.state.buildingUsers}
            >
            </SignUp>
         </Route>
-        <Route exact path='/messages'>
+        <Route exact path='/Messages'>
           <Messages
-           buildingUsers={this.state.buildingUsers}
-           activeUser={this.state.activeUser}
+              messages={this.state.messages}
+              buildingUsers={this.state.buildingUsers}
+              activeUser={this.state.activeUser}
+              addMessage={this.addMessage}
            >
            </Messages>
         </Route>
-
+        <Route exact path='/dashboard-messages'>
+        <DashboardMessages
+              messages={this.state.messages}
+              activeUser={this.state.activeUser}
+              allComments={this.state.comments}
+              addComments={this.addComments}
+              allMessages={this.state.messages}
+           >
+           </DashboardMessages>
+           </Route>
+       
        
         <Route exact path='/tenants-accounts'>
           <TenantsAccount
-           addUser={this.addUser}
-           buildingUsers={this.state.buildingUsers}
+              addUser={this.addUser}
+              buildingUsers={this.state.buildingUsers}
            >
            </TenantsAccount>
         </Route>
@@ -125,6 +142,8 @@ class App extends React.Component{
 
         </Container>
       </HashRouter>
+
+
     </div>
   )
   }

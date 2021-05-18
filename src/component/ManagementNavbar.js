@@ -8,13 +8,14 @@ class ManagementNavbar extends React.Component{
     }
 
 render(){
-    
-        const logout=(this.props.activeUser)? <Nav.Link to="/#/logout">Logout</Nav.Link>: null
+const owner=this.props.activeUser.owner;
+console.log(this.props.activeUser)    
+        const logout=(this.props.activeUser)? <Nav.Link to="/#" onClick={() => {this.props.logout()}}>Logout</Nav.Link>: null
         const login=(!this.props.activeUser)? <Nav.Link to="/#/login">Login</Nav.Link>:null
-        const signup=(this.props.activeUser.owner && !this.props.activeUser)? <Nav.Link to="/#/signup">Signup</Nav.Link>: null
+        const signup=(this.props.activeUser)? <Nav.Link to="/#/signup">Signup</Nav.Link>: null
         const userName=(this.props.activeUser)?<Nav.Link>{this.props.activeUser.name}</Nav.Link>:null
-        const messages=(this.props.activeUser)?<Nav.Link to="/#/messages">Messages</Nav.Link>:null
-        const tenantsAccount=(this.props.activeUser.owner)?<Nav.Link to="/#/tenants-accounts">Tenants account</Nav.Link>:null
+        const MessagesForum=(this.props.activeUser)?<Nav.Link to="/#/MessagesForum">Messages</Nav.Link>:null
+        const tenantsAccount=(owner)?<Nav.Link to="/#/tenants-accounts">Tenants account</Nav.Link>:null
     return(   
 
         <div>
@@ -24,7 +25,7 @@ render(){
                 <Nav className="mr-auto">
                    {signup}
                    {tenantsAccount}
-                   {messages}
+                   {MessagesForum}
                 </Nav>
                 <Nav className="ml-auto">
                     {userName}

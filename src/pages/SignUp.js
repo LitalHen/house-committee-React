@@ -1,6 +1,5 @@
-import { Button } from 'bootstrap';
 import React from 'react'
-import { Form, Jumbotron } from 'react-bootstrap';
+import { Form, Jumbotron, Button } from 'react-bootstrap';
 
 class SignUp extends React.Component{
 
