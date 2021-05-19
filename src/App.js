@@ -46,7 +46,8 @@ class App extends React.Component{
     })
   }
 
-  addMessage = (newMessage) =>{
+  
+  addMessage = (newMessage) => {
     this.setState({
       messages:this.state.messages.concat(newMessage)
     })
@@ -86,7 +87,6 @@ class App extends React.Component{
             <ManagementNavbar
               activeUser={this.state.activeUser}
               logout={this.logout}
-
             >
             </ManagementNavbar>
           </Route>
@@ -108,20 +108,20 @@ class App extends React.Component{
            </SignUp>
         </Route>
         <Route exact path='/Messages'>
-          <Messages
-              messages={this.state.messages}
-              buildingUsers={this.state.buildingUsers}
+          {/* <Messages
+              // buildingUsers={this.state.buildingUsers}
               activeUser={this.state.activeUser}
-              addMessage={this.addMessage}
+             
+              allMessages={this.state.messages}
            >
-           </Messages>
+           </Messages> */}
         </Route>
         <Route exact path='/dashboard-messages'>
         <DashboardMessages
-              messages={this.state.messages}
               activeUser={this.state.activeUser}
               allComments={this.state.comments}
               addComments={this.addComments}
+              addMessage={this.addMessage}
               allMessages={this.state.messages}
            >
            </DashboardMessages>

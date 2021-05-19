@@ -10,6 +10,7 @@
         "id":"2",
         "title":"Garbage",
         "description":"Please notice, garbage's day...",
-        "priority":"important"
+        "priority":"important",
+        "img":"https://image.shutterstock.com/image-vector/containers-garbage-different-types-set-260nw-1319470724.jpg"
     }
 ]

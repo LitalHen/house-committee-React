@@ -2,12 +2,14 @@
     {
         "userName":"lital hen",
         "comment":"Cool!",
-        "messageId":"1"
+        "messageId":"1",
+        "userId":"1"
     },
     
     {
         "userName":"ron levi",
         "comment":"Nice!",
-        "messageId":"1"
+        "messageId":"1",
+        "userId":"2"
     }
 ]
