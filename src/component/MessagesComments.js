@@ -1,13 +1,12 @@
 import React from 'react'
-import { Form, Button, Col, Modal, Accordion, Card } from 'react-bootstrap';
+import { Form, Button, Accordion, Card } from 'react-bootstrap';
 
 class MessagesComments extends React.Component{
 
 constructor(props){
     super(props);
     this.state={
-        comment: '',
-        ismodalOpen: false
+        comment: ''
     }
 }
 
@@ -34,17 +33,8 @@ addComment = (val) => {
         comment:''
     })
 
-    this.handleClose()
-
 }
 
-  
-handleClose = () =>{
-
-    this.setState({
-        ismodalOpen:false
-    })
-}
 
 render(){
     return(
