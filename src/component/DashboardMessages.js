@@ -1,6 +1,6 @@
 import React from 'react'
 import MessagesComments from './MessagesComments';
-import { Button, Col, Form, Modal } from 'react-bootstrap';
+import { Button,  Col, Container, Form, Jumbotron, Modal } from 'react-bootstrap';
 
 class DashboardMessages extends React.Component{
 
@@ -11,7 +11,8 @@ class DashboardMessages extends React.Component{
             title:'',
             description:'',
             priority:'',
-            ismodalOpen: false
+            ismodalOpen: false,
+            img:''
         }
     }
 
@@ -25,7 +26,8 @@ class DashboardMessages extends React.Component{
         const newMessage={
             title: this.state.title,
             description: this.state.description,
-            priority: this.state.priority
+            priority: this.state.priority,
+            img: this.state.img
         }
 
         this.props.addMessage(newMessage);
@@ -33,7 +35,8 @@ class DashboardMessages extends React.Component{
         this.setState({
             title:'',
             description:'',
-            priority:''
+            priority:'',
+            img:''
         })
         this.handleClose()
     }
@@ -69,6 +72,10 @@ render(){
                  
     return(
         <div>
+            <Container style={{width:"500px", margin:"0px"}}>
+            <Jumbotron>
+                 Messages
+            </Jumbotron>
             {messages}
         <Button type="button" onClick={()=>{this.setState({ismodalOpen:true})}}>Add Message</Button>
 
@@ -98,7 +105,8 @@ render(){
                 </Col>
                 <Col sm={10}> 
                      <Form.Label>Upload Img</Form.Label>
-                     <Form.File id="img" />  
+                     <Form.Control  className="message-img" type="text" value={this.state.img} onChange={(event)=>{this.formInput("img",event.target.value)}}>
+                     </Form.Control>
                 </Col>
             </Modal.Body>
         <Modal.Footer>
@@ -110,6 +118,7 @@ render(){
              </Button>
         </Modal.Footer>
         </Modal>
+        </Container>
         </div>
     )
 }

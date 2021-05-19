@@ -4,14 +4,12 @@ import { HashRouter, Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import ManagementNavbar from './component/ManagementNavbar';
 import LogIn from './pages/LogIn';
-import LogOut from './pages/LogOut';
 import SignUp from './pages/SignUp';
 import DashboardMessages from './component/DashboardMessages';
 import HomePage from './pages/HomePage';
 import usersJSON from './data/users.json';
 import messagesJSON from './data/messages.json';
 import TenantsAccount from './pages/TenantsAccount';
-import Messages from './component/Messages';
 import commentsJSON from './data/comments.json';
 
 class App extends React.Component{
@@ -22,14 +20,15 @@ class App extends React.Component{
       comments:commentsJSON,
       buildingUsers:usersJSON,
       messages:messagesJSON,
-      activeUser:{
-        name: "lital hen",
-        email: "lital@gmail.com",
-        pwd: "123",
-        address:'test 2',
-        communityName:'Hertzel',
-        owner:true
-      },
+      activeUser:null
+      // activeUser:{
+      //   name: "lital hen",
+      //   email: "lital@gmail.com",
+      //   pwd: "123",
+      //   address:'test 2',
+      //   communityName:'Hertzel',
+      //   owner:true
+      // },
       // activeUser:{
       //   name: "lital",
       //   email: "lital@gmail.com",
@@ -83,7 +82,7 @@ class App extends React.Component{
       <HashRouter>
         <Container>
 
-          <Route exact path={['/','/messages','/tenants-accounts']}>
+          <Route exact path={['/','/messages','/tenants-accounts','/dashboard-messages']}>
             <ManagementNavbar
               activeUser={this.state.activeUser}
               logout={this.logout}
@@ -107,15 +106,10 @@ class App extends React.Component{
            >
            </SignUp>
         </Route>
-        <Route exact path='/Messages'>
-          {/* <Messages
-              // buildingUsers={this.state.buildingUsers}
-              activeUser={this.state.activeUser}
-             
-              allMessages={this.state.messages}
-           >
-           </Messages> */}
+        <Route exact path='/messages'>
+  
         </Route>
+        
         <Route exact path='/dashboard-messages'>
         <DashboardMessages
               activeUser={this.state.activeUser}
@@ -126,7 +120,6 @@ class App extends React.Component{
            >
            </DashboardMessages>
            </Route>
-       
        
         <Route exact path='/tenants-accounts'>
           <TenantsAccount

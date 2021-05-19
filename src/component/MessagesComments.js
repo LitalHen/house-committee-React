@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button, Col, Modal } from 'react-bootstrap';
+import { Form, Button, Col, Modal, Accordion, Card } from 'react-bootstrap';
 
 class MessagesComments extends React.Component{
 
@@ -48,13 +48,23 @@ handleClose = () =>{
 
 render(){
     return(
+              
+            
         <div  key= {this.props.message.id}  style={{marginTop:'20px'}}>
-        <h6>{this.props.message.title}</h6>
-        <p> {this.props.message.priority} </p>
-        <p> {this.props.message.description}</p>
-        <img src={this.props.message.img}/>
-       
-        {
+                  <Accordion>
+            <Card>
+                <Card.Header>
+                <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                {this.props.message.title}
+                </Accordion.Toggle>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                <Card.Body>
+                     <h6>{this.props.message.title}</h6>
+                     <p> {this.props.message.priority} </p>
+                     <p> {this.props.message.description}</p>
+                     <img src={this.props.message.img}/>
+                     {
             this.props.allComments.filter((comment)=>{
 
                 return comment.messageId === this.props.message.id
@@ -68,9 +78,19 @@ render(){
                         </div>
             })
         }
+
+                <Button onClick={()=> this.setState({ismodalOpen:true})}>add comment</Button>
+                     </Card.Body>
+                </Accordion.Collapse>
+
         
-        <div>
-         <Button onClick={()=> this.setState({ismodalOpen:true})}>add comment</Button>
+       
+            </Card>
+            </Accordion>
+            <div>
+       
+
+       
          </div>
 
           <Modal show={this.state.ismodalOpen} onHide={this.handleClose}>

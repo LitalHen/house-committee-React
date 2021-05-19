@@ -25,13 +25,12 @@ class LogIn extends React.Component{
     login = () => {
 
         const userExist=this.props.buildingUsers.find((user) => {
-            return this.state.email === user.email && this.state.pwd === user.pwd
+            return (this.state.email === user.email)
         })
 
         if (userExist){
             this.props.login(userExist);
-            //close modal
-            window.location.href="/#/homepage"
+            window.location.href='/#/';
             this.setState({
                 errMessage:''
             })
@@ -53,11 +52,10 @@ render(){
             <Jumbotron >
               <h1>  Login </h1>
             </Jumbotron>
-            {/* //create modal */}
             <Form>
                 <Form.Group>
                     <Form.Label>Email</Form.Label>
-                        <Form.Control type="text" onChange={(event)=>{this.formInput("Email",event.target.value)}}placeholder="Enter Email" />
+                        <Form.Control type="text" onChange={(event)=>{this.formInput("email",event.target.value)}}placeholder="Enter Email" />
                     </Form.Group>
 
                 <Form.Group>

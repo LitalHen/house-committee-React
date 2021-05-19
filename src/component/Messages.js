@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Col, Form, Modal } from 'react-bootstrap';
+import { Button, Col, Form, Modal, Accordion,Card } from 'react-bootstrap';
 
 class Messages extends React.Component{
 
@@ -53,7 +53,6 @@ render(){
     return(
         <div>
               <Button type="button" onClick={()=>{this.setState({ismodalOpen:true})}}>Add Message</Button>
-
                 <Modal show={this.state.ismodalOpen} onHide={this.handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Create </Modal.Title>
