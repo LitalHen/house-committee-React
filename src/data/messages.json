@@ -2,14 +2,15 @@
     {
         "id":"1",
         "title":"pool party",
-        "description":"Coming soon...pool party, May 5th",
-        "priority":"info"
+        "details":"Coming soon...pool party, May 5th",
+        "priority":"info",
+        "img":"https://image.shutterstock.com/image-vector/containers-garbage-different-types-set-260nw-1319470724.jpg"
     },
 
     {
         "id":"2",
         "title":"Garbage",
-        "description":"Please notice, garbage's day...",
+        "details":"Please notice, garbage's day...",
         "priority":"important",
         "img":"https://image.shutterstock.com/image-vector/containers-garbage-different-types-set-260nw-1319470724.jpg"
     }

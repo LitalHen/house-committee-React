@@ -9,10 +9,13 @@ class DashboardMessages extends React.Component{
 
         this.state={
             title:'',
-            description:'',
+            details:'',
             priority:'',
             ismodalOpen: false,
-            img:''
+            img:'',
+            filter:'',
+            search:'',
+            date:''
         }
     }
 
@@ -25,18 +28,21 @@ class DashboardMessages extends React.Component{
     submitMessage = () => {
         const newMessage={
             title: this.state.title,
-            description: this.state.description,
+            details: this.state.details,
             priority: this.state.priority,
-            img: this.state.img
+            img: this.state.img,
+
         }
+
 
         this.props.addMessage(newMessage);
 
         this.setState({
             title:'',
-            description:'',
+            details:'',
             priority:'',
-            img:''
+            img:'',
+            
         })
         this.handleClose()
     }
@@ -48,37 +54,48 @@ class DashboardMessages extends React.Component{
         })
 }
 
-     addComment = (newComment) => {
+    addComment = (newComment) => {
         this.props.addComments(newComment)
     }
-    
-render(){   
-        <div>
-        
-         
-        </div>
 
-            const messages= this.props.allMessages.map((message,id) => {
+    // sortByDate = () => {
+        
+    // }
+  
+render(){ 
+            const messages= this.props.allMessages.filter((filteredMessages)=>{
+
+              return (filteredMessages.priority.includes(this.state.filter) && filteredMessages.title.includes(this.state.search) && filteredMessages.details.includes(this.state.search))
+            })
+            .map((message,id) => {
 
                 return <MessagesComments
                         message={message}
                         allComments={this.props.allComments}
                         addComment={this.addComment}
                         activeUser={this.props.activeUser}
-                        />
-                        
+                        />                       
                    })
-                   
-                 
+                                    
     return(
         <div>
+        
+        <Form.Label>Seacrh</Form.Label>
+        <Form.Control type="text" value={this.state.search} onChange={(event)=>{this.formInput('search', event.target.value)}}placeholder="search message" />
+        <Form.Label>Filter By Priority</Form.Label>
+            <Form.Control as="select" onChange={(event)=>{this.formInput('filter', event.target.value)}}>
+                    <option value="">view all messages</option>
+                    <option value="important">Important</option>
+                    <option value="info">Info</option>
+            </Form.Control>    
             <Container style={{width:"500px", margin:"0px"}}>
+
+                
             <Jumbotron>
                  Messages
             </Jumbotron>
             {messages}
         <Button type="button" onClick={()=>{this.setState({ismodalOpen:true})}}>Add Message</Button>
-
         <Modal show={this.state.ismodalOpen} onHide={this.handleClose}>
             <Modal.Header closeButton>
                  <Modal.Title>Create </Modal.Title>
@@ -92,8 +109,8 @@ render(){
                     </div>
                 </Col>
                 <Col sm={10}> 
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control  as="textarea" required value={this.state.description} rows={3} type="text" onChange={(event)=>{this.formInput("description",event.target.value)}}placeholder="Enter description" />  
+                    <Form.Label>Details</Form.Label>
+                    <Form.Control  as="textarea" required value={this.state.description} rows={3} type="text" onChange={(event)=>{this.formInput("details",event.target.value)}}placeholder="Enter description" />  
                 </Col>
                 <Col sm={10}>   
                      <Form.Label>Priority</Form.Label>
@@ -119,6 +136,7 @@ render(){
         </Modal.Footer>
         </Modal>
         </Container>
+
         </div>
     )
 }

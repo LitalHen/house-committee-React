@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Container, Form, Jumbotron, Table } from 'react-bootstrap';
+import { Accordion, Button, Card, Container, Form, Jumbotron, Table } from 'react-bootstrap';
 // import { v4 as uuid } from 'uuid';
 
 class TenantsAccount extends React.Component{
@@ -10,7 +10,8 @@ class TenantsAccount extends React.Component{
             name:'',
             email:'',
             aptNumber:'',
-            errMessage:''
+            errMessage:'',
+            pwd:'Aa1234Z3'
         }
         
     }
@@ -49,8 +50,7 @@ class TenantsAccount extends React.Component{
             email: this.state.email,
             aptNumber: this.state.aptNumber,
             owner: false,
-            pwd:'123'
-            // pwd: uuid()
+            pwd:this.state.pwd
         }
 
         this.props.addUser(newUserObj)
@@ -68,12 +68,23 @@ class TenantsAccount extends React.Component{
                  
                 const tenantsTable=this.props.buildingUsers.map((tenant) => {
                     
-                    return  <tr>
-                    <td>{tenant.aptNumber}</td>
-                    <td>{tenant.name}</td>
-                    <td>{tenant.email}</td>
-                    <td>{tenant.pwd}</td>
-                    </tr>
+                    return <Accordion>
+                    <Card>
+                        <Card.Header>
+                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                            Apartement number: {tenant.aptNumber}
+                            </Accordion.Toggle>
+                        </Card.Header>
+                            <Accordion.Collapse eventKey="0">
+                          <Card.Body>
+                            <h6>Tenant Name:</h6> {tenant.name}   
+                            <h6>Tenant Email:</h6> {tenant.email}  
+                            <h6>Tenant Password:</h6> {tenant.pwd}  
+                            <h6>Tenant Apt Number:</h6> {tenant.aptNumber}    
+                          </Card.Body>
+                        </Accordion.Collapse>
+                        </Card>
+                        </Accordion>
                 })
             
                 return(     
@@ -93,8 +104,9 @@ class TenantsAccount extends React.Component{
                         <Form.Label>Apartement Number</Form.Label>
                         <Form.Control  value={this.state.aptNumber} type="text" onChange={(event)=>{this.formInput("aptNumber",event.target.value)}}placeholder="Enter apartement number" />
                     </Form.Group>
-                    
+                    <div style={{marginTop:'10px', marginBottom:'10px'}}>
                     <Button variant="success" type="button" onClick={this.addTenants}>create tenant account!</Button>
+                    </div>
                     </Form>
 
                     <div style={{color:"red"}}>
@@ -102,19 +114,12 @@ class TenantsAccount extends React.Component{
                      </div>
                   
                         <Jumbotron>
-                            <h1>All Tenants Users</h1>
+                           All Tenants Users
                       </Jumbotron>
-                    <Table>
-                        <thead>
-                            <td>Appartment number</td>
-                            <td>Name</td>
-                            <td>Email</td>
-                            <td>Password</td>
-                        </thead>
-                        <tbody>
+                  
+                        
                              {tenantsTable}
-                        </tbody>
-                    </Table>
+ 
                 </Container>
                     
                     
