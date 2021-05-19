@@ -49,7 +49,6 @@ handleClose = () =>{
 render(){
     return(
               
-            
         <div  key= {this.props.message.id}  style={{marginTop:'20px'}}>
                   <Accordion>
             <Card>
@@ -78,13 +77,13 @@ render(){
                         </div>
             })
         }
-
-                <Button onClick={()=> this.setState({ismodalOpen:true})}>add comment</Button>
+                    <Form.Control value={this.state.comment}  as="textarea" rows={2} type="text" onChange={(event)=>{this.formInput("comment",event.target.value)}}placeholder="Enter comment" />
+                            
+                            <Button onClick={()=> {this.addComment(this.props.message.id)}}>
+                            Add comment
+                        </Button>
                      </Card.Body>
                 </Accordion.Collapse>
-
-        
-       
             </Card>
             </Accordion>
             <div>
@@ -93,26 +92,8 @@ render(){
        
          </div>
 
-          <Modal show={this.state.ismodalOpen} onHide={this.handleClose}>
-            <Modal.Header closeButton>
-                 <Modal.Title>Join the Discussion!</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Col sm={10}>   
-                <Form.Label>Comment</Form.Label>
-                <Form.Control value={this.state.comment}  as="textarea" rows={2} type="text" onChange={(event)=>{this.formInput("comment",event.target.value)}}placeholder="Enter comment" />
-                </Col>
-            </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={this.handleClose}>
-             Close
-            </Button>
-           <Button variant="primary" onClick={()=> {this.addComment(this.props.message.id)}}>
-            Submit comment
-             </Button>
-        </Modal.Footer>
-        </Modal>
-          
+            
+                
     </div>
 
     )
