@@ -9,26 +9,29 @@ import DashboardMessages from './component/DashboardMessages';
 import HomePage from './pages/HomePage';
 import usersJSON from './data/users.json';
 import messagesJSON from './data/messages.json';
+import issuesJSON from './data/issues.json'
 import TenantsAccount from './pages/TenantsAccount';
 import commentsJSON from './data/comments.json';
+import DashboardIssues from './component/DashboardIssues';
 
 class App extends React.Component{
   constructor(props){
     super(props);
 
     this.state={
+      issues:issuesJSON,
       comments:commentsJSON,
       buildingUsers:usersJSON,
       messages:messagesJSON,
-      activeUser:null
-      // activeUser:{
-      //   name: "lital hen",
-      //   email: "lital@gmail.com",
-      //   pwd: "123",
-      //   address:'test 2',
-      //   communityName:'Hertzel',
-      //   owner:true
-      // },
+      // activeUser:null
+      activeUser:{
+        name: "lital hen",
+        email: "lital@gmail.com",
+        pwd: "123",
+        address:'test 2',
+        communityName:'Hertzel',
+        owner:true
+      },
       // activeUser:{
       //   name: "lital",
       //   email: "lital@gmail.com",
@@ -39,6 +42,12 @@ class App extends React.Component{
     }
   }
   
+  addIssues = (newIssues) => {
+    this.setState({
+      issues: this.state.issues.concat(newIssues)
+    })
+  }
+
   addComments = (newCommment) => {
     this.setState({
       comments: this.state.comments.concat(newCommment)
@@ -57,11 +66,11 @@ class App extends React.Component{
       this.setState({
         buildingUsers:this.state.buildingUsers.concat(newUser)
       })
-      if (newUser.owner){
+      // if (newUser.owner){
         this.setState({
           activeUser: newUser
         })
-      }
+      // }
   }
 
   logout = () => {
@@ -117,10 +126,20 @@ class App extends React.Component{
               addComments={this.addComments}
               addMessage={this.addMessage}
               allMessages={this.state.messages}
+            
            >
            </DashboardMessages>
            </Route>
-       
+           <Route exact path='/dashboard-issues'>
+             <DashboardIssues
+               activeUser={this.state.activeUser}
+               allComments={this.state.comments}
+               addComments={this.addComments}
+               addIssue={this.addIssues}
+               allIssues={this.state.issues}
+             >
+           </DashboardIssues>
+           </Route>
         <Route exact path='/tenants-accounts'>
           <TenantsAccount
               addUser={this.addUser}

@@ -3,13 +3,23 @@
         "userName":"lital hen",
         "comment":"Cool!",
         "messageId":"1",
-        "userId":"1"
+        "userId":"1",
+        "type":"message"
     },
     
     {
         "userName":"ron levi",
         "comment":"Nice!",
         "messageId":"1",
-        "userId":"2"
+        "userId":"2",
+        "type":"message"
+    },
+
+    {
+        "userName":"ron levi",
+        "comment":"Great Idea!",
+        "messageId":"1",
+        "userId":"2",
+        "type":"issue"
     }
 ]

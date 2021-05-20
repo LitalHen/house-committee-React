@@ -43,6 +43,8 @@ class SignUp extends React.Component{
             address:'',
             communityName:''       
         })
+
+        window.location.href="/#/"
     }
 
 render(){

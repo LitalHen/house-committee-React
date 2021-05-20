@@ -9,8 +9,7 @@ class Messages extends React.Component{
         this.state={
             title:'',
             description:'',
-            priority:'',
-            ismodalOpen: false
+            priority:''
         }
     }
 
@@ -20,21 +19,10 @@ class Messages extends React.Component{
        })
     }
 
-    submitMessage = () => {
-        const newMessage={
-            title: this.state.title,
-            description: this.state.description,
-            priority: this.state.priority
-        }
+    submitIssue = (newIssue) => {
+  
+        this.props.addIssue(newIssue);
 
-        this.props.addMessage(newMessage);
-
-        this.setState({
-            title:'',
-            description:'',
-            priority:''
-        })
-        this.handleClose()
     }
     
     handleClose = () =>{

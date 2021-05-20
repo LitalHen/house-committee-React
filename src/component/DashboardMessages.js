@@ -10,8 +10,7 @@ class DashboardMessages extends React.Component{
 
         this.state={
             filter:'',
-            search:'',
-           
+            search:''           
         }
     }
 
@@ -22,27 +21,36 @@ class DashboardMessages extends React.Component{
     }
 
     submitMessage = (newMessage) => {
-
+        //Addmessage from app- add new message to json
+        //newMessage get from messagesIssueComponent
         this.props.addMessage(newMessage);
     }
 
 
     addComment = (newComment) => {
+        //addComments from app- add new message to json
+        //newComments get from messagesComments
         this.props.addComments(newComment)
     }
 
     // sortByDate = () => {
         
     // }
+
+ 
   
 render(){ 
-           
             const messages= this.props.allMessages.filter((filteredMessages)=>{
-
-              return (filteredMessages.priority.includes(this.state.filter) && filteredMessages.title.includes(this.state.search) && filteredMessages.details.includes(this.state.search))
-            })
-            .map((message,id) => {
-
+                // get allmessages json data, filter-get the filtered array of obj by search box or by priority selected
+              return ((filteredMessages.priority === this.state.filter || this.state.filter === "") &&
+                      filteredMessages.title.includes(this.state.search) && 
+                      filteredMessages.details.includes(this.state.search))
+            }).map((message,id) => {
+                //map on filtered array of obj-> message
+                //send each message to messagesComponent
+                //allcomments from app, to map all comments for each message
+                //addComment func from current component to add new comment to json
+                //active user-for user name
                 return <MessagesComments
                         message={message}
                         allComments={this.props.allComments}
@@ -53,31 +61,32 @@ render(){
 
                                     
     return(
+
         <div>
-        
-        <Form.Label>Seacrh</Form.Label>
-        <Form.Control type="text" value={this.state.search} onChange={(event)=>{this.formInput('search', event.target.value)}}placeholder="search message" />
-        <Form.Label>Filter By Priority</Form.Label>
-            <Form.Control as="select" onChange={(event)=>{this.formInput('filter', event.target.value)}}>
-                    <option value="">view all messages</option>
-                    <option value="important">Important</option>
-                    <option value="info">Info</option>
-            </Form.Control>    
-            <Container style={{width:"500px", margin:"0px"}}>
+            <Form.Label>Seacrh</Form.Label>
+                <Form.Control type="text" value={this.state.search} onChange={(event)=>{this.formInput('search', event.target.value)}}placeholder="search message" />
+            <Form.Label>Filter By Priority</Form.Label>
+                <Form.Control as="select" value={this.state.filter} onChange={(event)=>{this.formInput('filter', event.target.value)}}>
+                        <option value="">view all messages</option>
+                        <option value="important">Important</option>
+                        <option value="info">Info</option>
+                </Form.Control> 
 
-                
-            <Jumbotron>
-                 Messages
-            </Jumbotron>
-            {messages}
-            <MessageIssueComponent
-            submitMessage={this.submitMessage}
-            />
-        </Container>
-
+                <Container style={{width:"500px", margin:"0px"}}>                   
+                     <Jumbotron>
+                         Messages
+                     </Jumbotron>
+                     {/* show messages, all or filtered */}
+                         {messages}
+                     {/* send the submitMessage func from current component to modal- add new message */}
+                     <MessageIssueComponent
+                         addNewItem={this.submitMessage}
+                         type="message"
+                     />
+                </Container>
         </div>
-    )
-}
+     )
+    }
     
 }
 

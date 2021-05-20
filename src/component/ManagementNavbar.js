@@ -13,7 +13,8 @@ render(){
         const signup=(!this.props.activeUser)? <Nav.Link href="/#/signup">Signup</Nav.Link>: null
         const userName=(this.props.activeUser)?<Nav.Link>{this.props.activeUser.name}</Nav.Link>:null
         const dashboardMessages=(this.props.activeUser)?<Nav.Link href="/#/dashboard-messages">Messages</Nav.Link>:null
-        const tenantsAccount=(this.props.activeUser&&this.props.activeUser.owner)?<Nav.Link to="/#/tenants-accounts">Tenants account</Nav.Link>:null
+        const dashboardIssues=(this.props.activeUser && this.props.activeUser.owner)?<Nav.Link href="/#/dashboard-issues">Issues</Nav.Link>:null
+        const tenantsAccount=(this.props.activeUser && this.props.activeUser.owner)?<Nav.Link href="/#/tenants-accounts">Tenants account</Nav.Link>:null
     return(   
 
         <div>
@@ -22,14 +23,17 @@ render(){
                 <Navbar.Brand href="#home">Home</Navbar.Brand>
                 <Nav className="mr-auto">
                    {signup}
-                   {tenantsAccount}
+                  {tenantsAccount}
                    {dashboardMessages}
+                   {dashboardIssues}
                 </Nav>
-                <Nav className="ml-auto">
+                <div  className="ml-auto">
+                <Nav>
                     {userName}
                     {login}
                     {logout}
                </Nav>  
+               </div>
             </Navbar>
         </div>
     )
