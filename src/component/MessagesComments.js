@@ -48,7 +48,7 @@ class MessagesComments extends React.Component{
 
         deleteMessage = (index) => {
 
-            this.props.deleteMessage(index);
+            this.props.deleteMessage('messages', index);
             
         }
 
@@ -77,7 +77,7 @@ class MessagesComments extends React.Component{
                 id: this.state.id
             }
             
-            this.props.updateMessage(updatedMessage, this.state.index)
+            this.props.updateMessage('messages',updatedMessage, this.state.index)
             
             this.setState({
                 isUpdateMessage:false,

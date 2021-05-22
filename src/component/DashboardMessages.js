@@ -28,7 +28,8 @@ class DashboardMessages extends React.Component{
         const message={
             ...newMessage,
             date: moment().toDate(),
-            id: uuidv4()
+            id: uuidv4(),
+            ownerId: this.props.activeUser.id
         }
         this.props.addMessage(message);
     }
@@ -40,9 +41,9 @@ class DashboardMessages extends React.Component{
         this.props.addComments(newComment)
     }
 
-    updateMessage = (updatedMessage, index) => {
+    updateMessage = (key, updatedMessage, index) => {
 
-        this.props.updateMessage(updatedMessage, index)
+        this.props.updateMessage(key, updatedMessage, index)
     
     }
  

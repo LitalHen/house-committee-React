@@ -5,7 +5,8 @@
         "details":"We have to close the door",
         "priority":"normal",
         "img":"",
-        "priorityId":1
+        "priorityId":1,
+        "ownerId":"owner-Ahuzot HaNassi"
         
     },
 
@@ -15,7 +16,8 @@
         "details":"We have to clean the lobby",
         "priority":"important",
         "img":"",
-        "priorityId":2
+        "priorityId":2,
+        "ownerId":"mor levi7"
         
     }
 ]

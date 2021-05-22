@@ -43,15 +43,18 @@ class TenantsAccount extends React.Component{
                     })
                     
                 }
-        
+        const tenantId=`{${this.state.name}${this.state.aptNumber}}`
         const newUserObj={
 
             name: this.state.name,
             email: this.state.email,
             aptNumber: this.state.aptNumber,
             owner: false,
-            pwd:this.state.pwd
+            pwd:this.state.pwd,
+            id: tenantId
         }
+
+        console.log(tenantId)
 
         this.props.addUser(newUserObj)
         

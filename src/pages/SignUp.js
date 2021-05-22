@@ -10,7 +10,8 @@ class SignUp extends React.Component{
             email:'',
             pwd:'',
             address:'',
-            communityName:''
+            communityName:'',
+            id:''
         }
     }
 
@@ -30,7 +31,8 @@ class SignUp extends React.Component{
             pwd: this.state.pwd,
             address: this.state.address,
             communityName: this.state.communityName,
-            owner: true
+            owner: true,
+            id: `{owner-${this.state.communityName}}`
 
         }
 

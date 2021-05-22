@@ -21,7 +21,7 @@ class DashboardIssues extends React.Component{
         const issue={
             ...newIssue,
             date: moment().toDate(),
-            id: uuidv4()
+            id: this.props.activeUser.id
         }
     this.props.addIssue(issue);
 
@@ -30,6 +30,12 @@ class DashboardIssues extends React.Component{
     addComment = (newComment) => {
 
         this.props.addComments(newComment)
+    }
+
+    updateIssue = (key, updatedMessage, index) => {
+
+        this.props.updateIssue(key, updatedMessage, index)
+
     }
 
     sortedBy = (sortedValue) => {
@@ -55,6 +61,8 @@ render(){
                         activeUser={this.props.activeUser}
                         allComments={this.props.allComments}
                         addComment={this.addComment}
+                        deleteIssue={this.props.deleteIssue}
+                        updateIssue={this.updateIssue}
                         />    
                 })
 

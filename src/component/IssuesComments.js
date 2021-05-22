@@ -1,5 +1,6 @@
+
 import React from 'react'
-import { Button, Form, Accordion,Card } from 'react-bootstrap';
+import { Button, Form, Accordion,Card, Col,Modal } from 'react-bootstrap';
 
 
 class IssuesComments extends React.Component{
@@ -7,7 +8,15 @@ class IssuesComments extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            comment:''
+            comment:'',
+            isUpdateIssue: false,
+            messageId: '',
+            title:'',
+            details:'',
+            priority:'',
+            img:'',
+            id:'',
+            index: ''
         }
     }
 
@@ -17,6 +26,27 @@ class IssuesComments extends React.Component{
        })
     }
 
+    
+    deleteIssues = (index) => {
+
+        this.props.deleteIssue('issues', index);
+        
+    }
+    
+    editIssue = (index) => {
+            
+        this.setState({
+            messageId: this.props.issue.id,
+            isUpdateIssue:true,
+            title:this.props.issue.title,
+            details:this.props.issue.details,
+            priority:this.props.issue.priority,
+            img:this.props.issue.img,
+            id: this.props.issue.id,
+            index: index
+        })
+
+    }
 
     addComment = (val) => {
         
@@ -38,7 +68,41 @@ class IssuesComments extends React.Component{
         })
 
     }
+    updateIssue = () => {
 
+        const updatedIssue={
+            title: this.state.title,
+            details:this.state.details,
+            priority:this.state.priority,
+            img:this.state.img,
+            id: this.state.id
+        }
+        
+        this.props.updateIssue('issues',updatedIssue, this.state.index)
+        
+        this.setState({
+            isUpdateIssue:false,
+            title: '',
+            details:'',
+            priority:'',
+            img:'',
+            id: '',
+            index: ''
+            
+        })
+
+        this.setState({
+            isUpdateIssue:false
+        })
+        
+    }
+    
+    handleClose = () =>{
+
+        this.setState({
+            isUpdateIssue:false
+        })
+}
     
 render(){
 
@@ -52,6 +116,7 @@ render(){
                           {this.props.issue.title}
                          
                     </Accordion.Toggle>
+                 {(this.props.activeUser.id === this.props.issue.ownerId) &&  <Button type="button" onClick={()=>{this.deleteIssues(this.props.index)}}>delete</Button>}
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                      <Card.Body>
@@ -59,6 +124,9 @@ render(){
                         <p> {this.props.issue.priority} </p>
                         <p> {this.props.issue.details}</p>
                         <img src={this.props.issue.img}/>
+                      <div>
+                             {(this.props.activeUser.owner) && <Button type="button" onClick={()=>{this.editIssue(this.props.index)}}>Edit Message</Button>}
+                       </div>
                  {
                         
                      this.props.allComments.filter((comment)=>{
@@ -86,7 +154,46 @@ render(){
                 </Accordion.Collapse>
             </Card>
           </Accordion>    
-
+          <div>
+          <Modal show={this.state.isUpdateIssue} onHide={this.handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>update Issue </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <Col sm={10}>   
+                <Form.Label>Title</Form.Label>
+                <Form.Control type="text" value={this.state.title} onChange={(event)=>{this.formInput("title",event.target.value)}}placeholder="Enter title" />
+              </Col>
+            <Col sm={10}> 
+                <Form.Label>Description</Form.Label>
+                <Form.Control  as="textarea" value={this.state.details} rows={3} type="text" onChange={(event)=>{this.formInput("details",event.target.value)}}placeholder="Enter description" />  
+              </Col>
+            <Col sm={10}>   
+                <Form.Label>Priority</Form.Label>
+                        <Form.Control as="select" value={this.state.priority} onChange={(event)=>{this.formInput("priority",event.target.value)}}>
+                        <option value="">select priority</option>
+                        <option value="important">Important</option>
+                        <option value="normal">Normal</option>
+                        <option value="urgent">Urgent</option>
+                        </Form.Control>
+              </Col>
+            <Col sm={10}> 
+            <Form.Label>Upload Img</Form.Label>
+            <Form.Control type="text" value={this.state.img} onChange={(event)=>{this.formInput("img",event.target.value)}}>
+                    </Form.Control>
+              </Col>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={this.handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={this.updateIssue}>
+          update
+          </Button>
+        </Modal.Footer>
+      </Modal>
+        </div>
+ 
           
         </div>
 

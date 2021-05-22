@@ -28,9 +28,10 @@ class App extends React.Component{
         name: "lital hen",
         email: "lital@gmail.com",
         pwd: "123",
-        address:'test 2',
-        communityName:'Hertzel',
-        owner:true
+        address:'Hertzel 2',
+        communityName:'Ahuzot HaNassi',
+        owner:true,
+        id:"owner-Ahuzot HaNassi"
       },
       // activeUser:{
       //   name: "lital",
@@ -73,23 +74,23 @@ class App extends React.Component{
       // }
   }
 
-  deleteMessage = (index) => {
-    const message=this.state.messages;
+  deleteMessageOrIssue = (key , index) => {
+    const message=this.state[key];
     message.splice(index,1)
     this.setState({
-      messages: message
+      [key]: message
     })
   }
 
-  updateMessage = (message,index) => {
+  updateMessageOrIssue = (key,message,index) => {
     let number=index;
-  
+    
   const updatedMessage=[...this.state.messages];
   if (index !=-1){
     updatedMessage.splice(number,1, message)
   }
 this.setState({
-  messages: updatedMessage
+  [key]: updatedMessage
 })
   
   }
@@ -148,8 +149,8 @@ this.setState({
               addComments={this.addComments}
               addMessage={this.addMessage}
               allMessages={this.state.messages}
-              deleteMessage={this.deleteMessage}
-              updateMessage={this.updateMessage}
+              deleteMessage={this.deleteMessageOrIssue}
+              updateMessage={this.updateMessageOrIssue}
             
            >
            </DashboardMessages>
@@ -161,6 +162,8 @@ this.setState({
                addComments={this.addComments}
                addIssue={this.addIssues}
                allIssues={this.state.issues}
+               updateIssue={this.updateMessageOrIssue}
+               deleteIssue={this.deleteMessageOrIssue}
              >
            </DashboardIssues>
            </Route>

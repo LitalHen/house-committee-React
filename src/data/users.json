@@ -1,18 +1,20 @@
 [
     {
+        "id":"owner-Ahuzot HaNassi",
         "name":"lital",
         "email":"lital@gmail.com",
         "pwd":"1234",
         "owner":true,
-        "id":"Hertzel 2",
-        "communityName":"Ahuzot HaNassi"
+        "communityName":"Ahuzot HaNassi",
+        "address": "Hertzel 2"
     },
 
 
     {
-        "name":"mor",
+        "id":"mor levi7",
+        "name":"mor levi",
         "email":"mor@gmail.com",
-        "pwd":"123",
+        "pwd":"Aa1234Z3",
         "owner":false,
         "aptNumber":"7"
 
