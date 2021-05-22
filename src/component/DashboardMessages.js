@@ -2,6 +2,8 @@ import React from 'react'
 import MessagesComments from './MessagesComments';
 import {Container, Form, Jumbotron} from 'react-bootstrap';
 import MessageIssueComponent from './MessageIssueComponent';
+import { v4 as uuidv4 } from 'uuid';
+import moment from 'moment';
 
 class DashboardMessages extends React.Component{
 
@@ -20,10 +22,15 @@ class DashboardMessages extends React.Component{
        })
     }
 
-    submitMessage = (newMessage) => {
+    addNewMessage = (newMessage) => {
         //Addmessage from app- add new message to json
         //newMessage get from messagesIssueComponent
-        this.props.addMessage(newMessage);
+        const message={
+            ...newMessage,
+            date: moment().toDate(),
+            id: uuidv4()
+        }
+        this.props.addMessage(message);
     }
 
 
@@ -33,29 +40,36 @@ class DashboardMessages extends React.Component{
         this.props.addComments(newComment)
     }
 
-    // sortByDate = () => {
-        
-    // }
+    updateMessage = (updatedMessage, index) => {
 
+        this.props.updateMessage(updatedMessage, index)
+    
+    }
  
   
 render(){ 
-            const messages= this.props.allMessages.filter((filteredMessages)=>{
+            const messages= this.props.allMessages.filter((Messages)=>{
                 // get allmessages json data, filter-get the filtered array of obj by search box or by priority selected
-              return ((filteredMessages.priority === this.state.filter || this.state.filter === "") &&
-                      filteredMessages.title.includes(this.state.search) && 
-                      filteredMessages.details.includes(this.state.search))
-            }).map((message,id) => {
+              return ((Messages.priority === this.state.filter || this.state.filter === "") &&
+              Messages.title.includes(this.state.search) && 
+              Messages.details.includes(this.state.search))
+            }).map(( filteredMessage, index) => {
                 //map on filtered array of obj-> message
                 //send each message to messagesComponent
                 //allcomments from app, to map all comments for each message
                 //addComment func from current component to add new comment to json
                 //active user-for user name
                 return <MessagesComments
-                        message={message}
+                        index={index}
+                        message={filteredMessage}
                         allComments={this.props.allComments}
                         addComment={this.addComment}
                         activeUser={this.props.activeUser}
+                        deleteMessage={this.props.deleteMessage}
+                        addNewItem={this.addNewItem}
+                        allMessages={this.props.allMessages}
+                        updateMessage={this.updateMessage}
+                        
                         />                       
                    })
 
@@ -80,7 +94,7 @@ render(){
                          {messages}
                      {/* send the submitMessage func from current component to modal- add new message */}
                      <MessageIssueComponent
-                         addNewItem={this.submitMessage}
+                         addNewItem={this.addNewMessage}
                          type="message"
                      />
                 </Container>

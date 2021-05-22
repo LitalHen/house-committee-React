@@ -1,7 +1,9 @@
 import React from 'react'
-import { Button, Col, Form, Modal, Accordion,Card, Jumbotron, Container } from 'react-bootstrap';
+import { Form, Jumbotron, Container } from 'react-bootstrap';
 import IssuesComments from './IssuesComments';
 import MessageIssueComponent from './MessageIssueComponent';
+import { v4 as uuidv4 } from 'uuid';
+import moment from 'moment';
 
 class DashboardIssues extends React.Component{
 
@@ -9,35 +11,47 @@ class DashboardIssues extends React.Component{
         super(props);
 
         this.state={
-            prioritySort:'',
-            isPriority:false
+            allIssues:''
         }
 
     }
 
-    submitIssue = (newIssue) => {
-  //from modal
-        this.props.addIssue(newIssue);
-    }
+    addNewIssue = (newIssue) => {
+        //from modal
+        const issue={
+            ...newIssue,
+            date: moment().toDate(),
+            id: uuidv4()
+        }
+    this.props.addIssue(issue);
+
+}
 
     addComment = (newComment) => {
 
         this.props.addComments(newComment)
     }
 
-    sortedBy = () => {
+    sortedBy = (sortedValue) => {
 
-       this.setState({
-           prioritySort:"priority",
-           isPriority: !this.state.isPriority
+        this.setState({
+            allIssues: this.props.allIssues
         })
+
+        let sortedIssues;
+        if (sortedValue === "priority"){
+           sortedIssues = this.state.allIssues.sort((a,b)=> b.priorityId -a.priorityId) 
+        }
+            
+        
     }
-    
+
 render(){
 
-               const issues=this.props.allIssues.map((filteredIssue, id)=>{
+               const issues=this.props.allIssues.map((issue, index)=>{
                 return <IssuesComments
-                        issue={filteredIssue}
+                        issue={issue}
+                        index={index}
                         activeUser={this.props.activeUser}
                         allComments={this.props.allComments}
                         addComment={this.addComment}
@@ -51,14 +65,19 @@ render(){
                      <Jumbotron>
                          Issues
                      </Jumbotron>
+                     
                      <Form.Label>Filter By Priority</Form.Label>
-                       {this.props.activeUser.owner &&  <input type="checkbox" checked={this.state.isPriority} onChange={this.sortedBy}>
-                             </input> }
+                       {this.props.activeUser.owner &&
+                       <Form.Control as="select" value={this.state.sortBy} onChange={(event)=>{this.sortedBy(event.target.value)}}>
+                        <option value="">sorted by</option>
+                        <option value="priority">Priority</option>
+                        <option value="date">Date</option>
+                </Form.Control> }
                      {/* show messages, all or filtered */}
                          {issues}
                      {/* send the submitMessage func from current component to modal- add new message */}
                      <MessageIssueComponent
-                          addNewItem={this.submitIssue}
+                          addNewItem={this.addNewIssue}
                           type="issue"
                      />
                 </Container>

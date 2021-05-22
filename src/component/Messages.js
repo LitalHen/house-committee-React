@@ -7,9 +7,11 @@ class Messages extends React.Component{
         super(props);
 
         this.state={
-            title:'',
-            description:'',
-            priority:''
+          ismodalOpen:this.props.isUpdateMessage,
+          title:this.props.title,
+          details:this.props.details,
+          priority:this.props.priority,
+          img:this.props.img
         }
     }
 
@@ -19,31 +21,36 @@ class Messages extends React.Component{
        })
     }
 
-    submitIssue = (newIssue) => {
-  
-        this.props.addIssue(newIssue);
+    submitMessage = (message) => {
+
+        const newMessage={
+          title:this.state.title,
+          details:this.state.details,
+          priority:this.state.priority,
+          img:this.state.img
+        }
+        this.props.addNewItem(newMessage);
 
     }
     
     handleClose = () =>{
 
         this.setState({
-            ismodalOpen:false
+          ismodalOpen:false
         })
 }
     
 render(){
 
-  const newMessage=this.props.allMessages.map((message)=>{
+  const newMessage=this.props.allMessages.find((message)=>{
     
-        return message.title
+        return message.id === this.props.messageId
 })
     return(
         <div>
-              <Button type="button" onClick={()=>{this.setState({ismodalOpen:true})}}>Add Message</Button>
-                <Modal show={this.state.ismodalOpen} onHide={this.handleClose}>
+          <Modal show={this.state.ismodalOpen} onHide={this.handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Create </Modal.Title>
+          <Modal.Title>update message </Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <Col sm={10}>   
@@ -52,11 +59,11 @@ render(){
               </Col>
             <Col sm={10}> 
                 <Form.Label>Description</Form.Label>
-                <Form.Control  as="textarea" value={this.state.description} rows={3} type="text" onChange={(event)=>{this.formInput("description",event.target.value)}}placeholder="Enter description" />  
+                <Form.Control  as="textarea" value={this.state.details} rows={3} type="text" onChange={(event)=>{this.formInput("description",event.target.value)}}placeholder="Enter description" />  
               </Col>
             <Col sm={10}>   
                 <Form.Label>Priority</Form.Label>
-                        <Form.Control as="select" value={this.state.value} onChange={(event)=>{this.formInput("priority",event.target.value)}}>
+                        <Form.Control as="select" value={this.state.priority} onChange={(event)=>{this.formInput("priority",event.target.value)}}>
                         <option value="">select priority</option>
                         <option value="important">Important</option>
                         <option value="info">Info</option>
@@ -64,7 +71,7 @@ render(){
               </Col>
             <Col sm={10}> 
             <Form.Label>Upload Img</Form.Label>
-                    <Form.File id="img" />  
+                    <Form.File  id="img" />  
               </Col>
         </Modal.Body>
         <Modal.Footer>
@@ -72,11 +79,10 @@ render(){
             Close
           </Button>
           <Button variant="primary" onClick={this.submitMessage}>
-          submit message
+          update message
           </Button>
         </Modal.Footer>
       </Modal>
-      {newMessage}
         </div>
 
         

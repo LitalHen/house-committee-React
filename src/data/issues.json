@@ -3,7 +3,19 @@
         "id":"1",
         "title":"Lobby door",
         "details":"We have to close the door",
-        "priority":"info",
-        "img":""
+        "priority":"normal",
+        "img":"",
+        "priorityId":1
+        
+    },
+
+    {
+        "id":"2",
+        "title":"Lobby clean",
+        "details":"We have to clean the lobby",
+        "priority":"important",
+        "img":"",
+        "priorityId":2
+        
     }
 ]

@@ -6,11 +6,7 @@ class IssuesComments extends React.Component{
 
     constructor(props){
         super(props);
-
         this.state={
-            title:'',
-            details:'',
-            priority:'',
             comment:''
         }
     }
@@ -21,16 +17,6 @@ class IssuesComments extends React.Component{
        })
     }
 
-    submitIssue = (newIssue) => {
-            //from modal
-            const finalIssue={
-                ...newIssue,
-                 type: "issue",
-                 date: new Date()
-            }
-        this.props.addIssue(finalIssue);
-
-    }
 
     addComment = (val) => {
         
@@ -42,12 +28,12 @@ class IssuesComments extends React.Component{
             type:"issue"
         }
 
-        this.props.addComment(newComment)
+        if (this.state.comment!=""){
+
+              this.props.addComment(newComment)
+        }
         
         this.setState({
-            title:'',
-            details:'',
-            priority:'',
             comment:''
         })
 
@@ -58,12 +44,13 @@ render(){
 
     return(
 
-        <div  sm={6} md={4} lg={3} key= {this.props.issue.id} style={{marginTop:'20px'}}>
+        <div sm={6} md={4} lg={3} key= {this.props.issue.id} style={{marginTop:'20px'}}>
             <Accordion>
                <Card>
                  <Card.Header>
                      <Accordion.Toggle as={Button} variant="link" eventKey="0">
                           {this.props.issue.title}
+                         
                     </Accordion.Toggle>
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
@@ -73,7 +60,7 @@ render(){
                         <p> {this.props.issue.details}</p>
                         <img src={this.props.issue.img}/>
                  {
-
+                        
                      this.props.allComments.filter((comment)=>{
                          return comment.messageId === this.props.issue.id && comment.type === "issue"
                      })
@@ -99,6 +86,8 @@ render(){
                 </Accordion.Collapse>
             </Card>
           </Accordion>    
+
+          
         </div>
 
         

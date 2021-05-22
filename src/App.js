@@ -73,6 +73,28 @@ class App extends React.Component{
       // }
   }
 
+  deleteMessage = (index) => {
+    const message=this.state.messages;
+    message.splice(index,1)
+    this.setState({
+      messages: message
+    })
+  }
+
+  updateMessage = (message,index) => {
+    let number=index;
+  
+  const updatedMessage=[...this.state.messages];
+  if (index !=-1){
+    updatedMessage.splice(number,1, message)
+  }
+this.setState({
+  messages: updatedMessage
+})
+  
+  }
+
+
   logout = () => {
     this.setState({
       activeUser:null
@@ -126,6 +148,8 @@ class App extends React.Component{
               addComments={this.addComments}
               addMessage={this.addMessage}
               allMessages={this.state.messages}
+              deleteMessage={this.deleteMessage}
+              updateMessage={this.updateMessage}
             
            >
            </DashboardMessages>

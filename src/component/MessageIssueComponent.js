@@ -4,7 +4,7 @@ class MessageIssueComponent extends React.Component{
 //modal input for both message and issues component- generic component
     constructor(props){
         super(props);
-
+ 
         this.state={
             ismodalOpen: false,
             title:'',
@@ -79,7 +79,8 @@ render(){
                     </Col>
                     <Col sm={10}> 
                     <Form.Label>Upload Img</Form.Label>
-                        <Form.File id="img" />  
+                    <Form.Control type="text" value={this.state.img} onChange={(event)=>{this.formInput("img",event.target.value)}}>
+                    </Form.Control>
                     </Col>
                 </Modal.Body>
                 <Modal.Footer>
