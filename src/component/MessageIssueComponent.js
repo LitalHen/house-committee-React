@@ -10,7 +10,8 @@ class MessageIssueComponent extends React.Component{
             title:'',
             details:'',
             priority:'',
-            img:''
+            img:'',
+            status:'open'
         }
     }
 
@@ -26,7 +27,8 @@ class MessageIssueComponent extends React.Component{
             title: this.state.title,
             details: this.state.details,
             priority: this.state.priority,
-            img: this.state.img
+            img: this.state.img,
+            status: this.state.status
         }
         //props function from Dashboardmessages component 
         this.props.addNewItem(newMessage);
@@ -35,7 +37,7 @@ class MessageIssueComponent extends React.Component{
             title:'',
             details:'',
             priority:'',
-            img:''    
+            img:''  
         })
 
         this.handleClose()
@@ -44,7 +46,11 @@ class MessageIssueComponent extends React.Component{
     handleClose = () =>{
 
         this.setState({
-            ismodalOpen:false
+            ismodalOpen:false,
+            title:'',
+            details:'',
+            priority:'',
+            img:'' 
         })
     }
 
@@ -76,6 +82,13 @@ render(){
                                 {this.props.type==="issue" && <option value="normal">Normal</option>}
                                 {this.props.type==="issue" && <option value="urgent">Urgent</option>}
                             </Form.Control>
+                            {this.props.type==="issue" && <Form.Label>Status</Form.Label>}
+                            {this.props.type==="issue" &&
+                            <Form.Control as="select" value={this.state.value} onChange={(event)=>{this.formInput("status",event.target.value)}}>
+                                <option value="open">Open</option>
+                                <option value="close">Close</option>
+                                </Form.Control>
+                           }
                     </Col>
                     <Col sm={10}> 
                     <Form.Label>Upload Img</Form.Label>
@@ -88,7 +101,7 @@ render(){
                     Close
                 </Button>
                 <Button variant="primary" onClick={this.submitNewMessage}>
-                    submit message
+                    submit
                 </Button>
                 </Modal.Footer>
             </Modal>

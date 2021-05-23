@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Button, Form, Accordion,Card, Col,Modal } from 'react-bootstrap';
+import { Button, Form, Accordion,Card, Col,Modal, Container } from 'react-bootstrap';
 
 
 class IssuesComments extends React.Component{
@@ -16,7 +16,8 @@ class IssuesComments extends React.Component{
             priority:'',
             img:'',
             id:'',
-            index: ''
+            index: '',
+            status:''
         }
     }
 
@@ -43,7 +44,8 @@ class IssuesComments extends React.Component{
             priority:this.props.issue.priority,
             img:this.props.issue.img,
             id: this.props.issue.id,
-            index: index
+            index: index,
+            status:this.props.issue.status            
         })
 
     }
@@ -75,7 +77,8 @@ class IssuesComments extends React.Component{
             details:this.state.details,
             priority:this.state.priority,
             img:this.state.img,
-            id: this.state.id
+            id: this.state.id,
+            status: this.state.status
         }
         
         this.props.updateIssue('issues',updatedIssue, this.state.index)
@@ -87,12 +90,20 @@ class IssuesComments extends React.Component{
             priority:'',
             img:'',
             id: '',
-            index: ''
+            index: '',
+            status:''
             
         })
 
         this.setState({
-            isUpdateIssue:false
+            isUpdateIssue:false,
+            title: '',
+            details:'',
+            priority:'',
+            img:'',
+            id: '',
+            index: '',
+            status:''
         })
         
     }
@@ -100,7 +111,14 @@ class IssuesComments extends React.Component{
     handleClose = () =>{
 
         this.setState({
-            isUpdateIssue:false
+            isUpdateIssue:false,
+            title: '',
+            details:'',
+            priority:'',
+            img:'',
+            id: '',
+            index: '',
+            status:''
         })
 }
     
@@ -108,7 +126,7 @@ render(){
 
     return(
 
-        <div sm={6} md={4} lg={3} key= {this.props.issue.id} style={{marginTop:'20px'}}>
+        <Container sm={6} md={4} lg={3} key= {this.props.issue.id} style={{marginTop:'20px'}}>
             <Accordion>
                <Card>
                  <Card.Header>
@@ -120,12 +138,13 @@ render(){
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                      <Card.Body>
-                        <h6>{this.props.issue.title}</h6>
-                        <p> {this.props.issue.priority} </p>
-                        <p> {this.props.issue.details}</p>
+                         <p>Status:{this.props.issue.status}</p>
+                        <h4>{this.props.issue.title}</h4>
+                        <p>Priority:{this.props.issue.priority} </p>
+                        <p>Details:{this.props.issue.details}</p>
                         <img src={this.props.issue.img}/>
                       <div>
-                             {(this.props.activeUser.owner) && <Button type="button" onClick={()=>{this.editIssue(this.props.index)}}>Edit Message</Button>}
+                             {(this.props.activeUser.id === this.props.issue.ownerId) && <Button type="button" onClick={()=>{this.editIssue(this.props.index)}}>Edit Issue</Button>}
                        </div>
                  {
                         
@@ -160,6 +179,13 @@ render(){
           <Modal.Title>update Issue </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+        <Col sm={10}>
+            <Form.Label>Status</Form.Label>
+                <Form.Control as="select" value={this.state.value} onChange={(event)=>{this.formInput("status",event.target.value)}}>
+                    <option value="open">Open</option>
+                    <option value="close">Close</option>
+                    </Form.Control>
+                         </Col>
             <Col sm={10}>   
                 <Form.Label>Title</Form.Label>
                 <Form.Control type="text" value={this.state.title} onChange={(event)=>{this.formInput("title",event.target.value)}}placeholder="Enter title" />
@@ -195,7 +221,7 @@ render(){
         </div>
  
           
-        </div>
+        </Container>
 
         
     )

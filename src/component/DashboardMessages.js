@@ -3,7 +3,6 @@ import MessagesComments from './MessagesComments';
 import {Container, Form, Jumbotron} from 'react-bootstrap';
 import MessageIssueComponent from './MessageIssueComponent';
 import { v4 as uuidv4 } from 'uuid';
-import moment from 'moment';
 
 class DashboardMessages extends React.Component{
 
@@ -27,7 +26,7 @@ class DashboardMessages extends React.Component{
         //newMessage get from messagesIssueComponent
         const message={
             ...newMessage,
-            date: moment().toDate(),
+            date: new Date(),
             id: uuidv4(),
             ownerId: this.props.activeUser.id
         }

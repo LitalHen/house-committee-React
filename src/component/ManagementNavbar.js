@@ -20,7 +20,7 @@ render(){
         <div>
 
             <Navbar bg="primary" sm={6} md={4} lg={3} variant="dark">
-                <Navbar.Brand href="#home">Home</Navbar.Brand>
+                <Navbar.Brand href="#home">HOA System</Navbar.Brand>
                 <Nav className="mr-auto">
                    {signup}
                   {tenantsAccount}

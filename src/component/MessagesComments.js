@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button, Accordion, Card, Modal, Col} from 'react-bootstrap';
+import { Form, Button, Accordion, Card, Modal, Col, Container} from 'react-bootstrap';
 // import Messages from './Messages';
 
 class MessagesComments extends React.Component{
@@ -107,7 +107,7 @@ class MessagesComments extends React.Component{
 render(){
     return(
               
-        <div sm={6} md={4} lg={3} key= {this.props.message.id} style={{marginTop:'20px'}}>
+        <Container sm={6} md={4} lg={3} key= {this.props.message.id} style={{marginTop:'20px'}}>
          {/* show each message in accordion view, message from DashboardMessages after filter and map */}
           <Accordion>
             <Card>
@@ -120,10 +120,9 @@ render(){
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                      <Card.Body>
-                   
                         <h6>{this.props.message.title}</h6>
-                        <p> {this.props.message.priority} </p>
-                        <p> {this.props.message.details}</p>
+                        <p>Priority: {this.props.message.priority} </p>
+                        <p>Details: {this.props.message.details}</p>
                         <img src={this.props.message.img}/>
                     <div>
                       {(this.props.activeUser.owner) && <Button type="button" onClick={()=>{this.editMessage(this.props.index)}}>Edit Message</Button>}
@@ -195,7 +194,7 @@ render(){
  
                 
   
-    </div>
+    </Container>
 
     )
 

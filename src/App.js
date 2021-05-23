@@ -85,9 +85,10 @@ class App extends React.Component{
   updateMessageOrIssue = (key,message,index) => {
     let number=index;
     
-  const updatedMessage=[...this.state.messages];
+  const updatedMessage=[...this.state.messages]; // updatedMessage.slice()
+
   if (index !=-1){
-    updatedMessage.splice(number,1, message)
+    updatedMessage[index] = message;
   }
 this.setState({
   [key]: updatedMessage

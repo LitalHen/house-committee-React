@@ -2,8 +2,6 @@ import React from 'react'
 import { Form, Jumbotron, Container } from 'react-bootstrap';
 import IssuesComments from './IssuesComments';
 import MessageIssueComponent from './MessageIssueComponent';
-import { v4 as uuidv4 } from 'uuid';
-import moment from 'moment';
 
 class DashboardIssues extends React.Component{
 
@@ -11,7 +9,7 @@ class DashboardIssues extends React.Component{
         super(props);
 
         this.state={
-            allIssues:''
+            sortBy:''
         }
 
     }
@@ -20,9 +18,10 @@ class DashboardIssues extends React.Component{
         //from modal
         const issue={
             ...newIssue,
-            date: moment().toDate(),
+            date: new Date(),
             id: this.props.activeUser.id
         }
+        console.log(issue.date)
     this.props.addIssue(issue);
 
 }
@@ -41,20 +40,18 @@ class DashboardIssues extends React.Component{
     sortedBy = (sortedValue) => {
 
         this.setState({
-            allIssues: this.props.allIssues
-        })
-
-        let sortedIssues;
-        if (sortedValue === "priority"){
-           sortedIssues = this.state.allIssues.sort((a,b)=> b.priorityId -a.priorityId) 
-        }
+            sortBy:sortedValue
             
+        })
         
     }
 
 render(){
 
-               const issues=this.props.allIssues.map((issue, index)=>{
+               const issues=this.props.allIssues.slice().sort((a,b)=>{
+                   return ((this.state.sortBy === "priority" ? b.priorityId -a.priorityId:null) || (this.state.sortBy=== '') ||
+                             (this.state.sortBy === "date" ? b.date - a.date :null))
+               }).map((issue, index)=>{
                 return <IssuesComments
                         issue={issue}
                         index={index}

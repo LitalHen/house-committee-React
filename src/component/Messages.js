@@ -42,12 +42,9 @@ class Messages extends React.Component{
     
 render(){
 
-  const newMessage=this.props.allMessages.find((message)=>{
-    
-        return message.id === this.props.messageId
-})
     return(
         <div>
+               {(this.props.activeUser.id === this.props.issue.ownerId) && <Button type="button" onClick={()=>{this.editIssue(this.props.index)}}>Edit Message</Button>}
           <Modal show={this.state.ismodalOpen} onHide={this.handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>update message </Modal.Title>
