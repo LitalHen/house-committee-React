@@ -1,5 +1,5 @@
 import React from 'react'
-import { Accordion, Button, Card, Container, Form, Jumbotron, Table } from 'react-bootstrap';
+import { Accordion, Button, Card, Col, Container, Form, Jumbotron,  Modal} from 'react-bootstrap';
 // import { v4 as uuid } from 'uuid';
 
 class TenantsAccount extends React.Component{
@@ -11,7 +11,9 @@ class TenantsAccount extends React.Component{
             email:'',
             aptNumber:'',
             errMessage:'',
-            pwd:'Aa1234Z3'
+            pwd:'Aa1234Z3',
+            isUpdateAccount: false,
+            index:''
         }
         
     }
@@ -66,10 +68,66 @@ class TenantsAccount extends React.Component{
         })
         
     }
+
+    editTenant = (index) => {
+
+        this.setState({
+            isUpdateAccount:true,
+            name: this.props.buildingUsers[index].name,
+            email: this.props.buildingUsers[index].email,
+            aptNumber: this.props.buildingUsers[index].aptNumber,
+            owner: false,
+            pwd:this.props.buildingUsers[index].pwd,
+            index:index
+        })
+       
+    }
+
+    
+    updateAccount = () => {
+
+        const tenantId=`{${this.state.name}${this.state.aptNumber}}`
+        const updatedAccount={
+            name: this.state.name,
+            email: this.state.email,
+            aptNumber: this.state.aptNumber,
+            owner: false,
+            pwd:this.state.pwd,
+            id: tenantId
+        }
+
+        this.props.updateTenantAccount('buildingUsers',updatedAccount,this.state.index )
+        this.setState({
+            isUpdateAccount:false,
+            name:'' ,
+            email:'',
+            aptNumber:'' ,
+            owner:'' ,
+            pwd:'',
+        })
+       
+    }
+    
+    handleClose = () =>{
+
+        this.setState({
+            isUpdateAccount:false,
+            name:'' ,
+            email:'',
+            aptNumber:'' ,
+            owner:'' ,
+            pwd:''
+        })
+}
+    
+    deleteTenantAccount = (index) => {
+        
+        this.props.deleteTenantAccount('buildingUsers',index)
+    }
     
     render(){
                  
-                const tenantsTable=this.props.buildingUsers.map((tenant) => {
+                const tenantsTable=this.props.buildingUsers.map((tenant,index) => {
                     
                     return <Accordion>
                     <Card>
@@ -84,6 +142,8 @@ class TenantsAccount extends React.Component{
                             <h6>Tenant Email:</h6> {tenant.email}  
                             <h6>Tenant Password:</h6> {tenant.pwd}  
                             <h6>Tenant Apt Number:</h6> {tenant.aptNumber}    
+                            <Button variant="danger" type="button" onClick={()=>{this.deleteTenantAccount(index)}}>Delete Account</Button>
+                            <Button variant="info" type="button" onClick={()=>{this.editTenant(index)}}>Edit Account</Button>
                           </Card.Body>
                         </Accordion.Collapse>
                         </Card>
@@ -95,7 +155,7 @@ class TenantsAccount extends React.Component{
                     <Form>
                     <Form.Group>
                         <Form.Label>Name</Form.Label>
-                        <Form.Control  value={this.state.name} type="text" onChange={(event)=>{this.formInput("name",event.target.value)}}placeholder="Enter full name" />
+                        <Form.Control value={this.state.name} type="text" onChange={(event)=>{this.formInput("name",event.target.value)}}placeholder="Enter full name" />
                     </Form.Group>
                     
                     <Form.Group>
@@ -115,6 +175,37 @@ class TenantsAccount extends React.Component{
                     <div style={{color:"red"}}>
                         {this.state.errMessage}
                      </div>
+                     <div>
+          <Modal show={this.state.isUpdateAccount} onHide={this.handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>update Account </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Col sm={10}>
+            <Form.Label>Name</Form.Label>
+                <Form.Control value={this.state.name} type="text" onChange={(event)=>{this.formInput("name",event.target.value)}}>
+                    
+                    </Form.Control>
+                         </Col>
+            <Col sm={10}>   
+                <Form.Label>Email</Form.Label>
+                <Form.Control  value={this.state.email} type="email" onChange={(event)=>{this.formInput("email",event.target.value)}} />
+              </Col>
+            <Col sm={10}> 
+                <Form.Label>Apartement Number</Form.Label>
+                <Form.Control value={this.state.aptNumber} type="text" onChange={(event)=>{this.formInput("aptNumber",event.target.value)}} />  
+              </Col>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={this.handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={this.updateAccount}>
+          update
+          </Button>
+        </Modal.Footer>
+      </Modal>
+        </div>
                   
                         <Jumbotron>
                            All Tenants Users

@@ -59,10 +59,12 @@ render(){
     return(
         
         <div>
-            <Button type="button" onClick={()=>{this.setState({ismodalOpen:true})}}>Add Message</Button>
+            {(this.props.type==="message" && this.props.activeUser.owner) &&   <Button type="button" onClick={()=>{this.setState({ismodalOpen:true})}}>Add Message</Button>}
+            {this.props.type==="issue"  && <Button type="button" onClick={()=>{this.setState({ismodalOpen:true})}}>Add Issue</Button>}
             <Modal show={this.state.ismodalOpen} onHide={this.handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Create </Modal.Title>
+                {this.props.type==="message" && <Modal.Title>Create Message </Modal.Title>}
+                {this.props.type==="issue"  && <Modal.Title>Create Issue </Modal.Title>}
                 </Modal.Header>
                 <Modal.Body>
                     <Col sm={10}>   

@@ -13,6 +13,7 @@ import issuesJSON from './data/issues.json'
 import TenantsAccount from './pages/TenantsAccount';
 import commentsJSON from './data/comments.json';
 import DashboardIssues from './component/DashboardIssues';
+import LogOut from './pages/LogOut';
 
 class App extends React.Component{
   constructor(props){
@@ -74,7 +75,7 @@ class App extends React.Component{
       // }
   }
 
-  deleteMessageOrIssue = (key , index) => {
+  deleteMessageOrIssueOrTenant = (key , index) => {
     const message=this.state[key];
     message.splice(index,1)
     this.setState({
@@ -82,10 +83,9 @@ class App extends React.Component{
     })
   }
 
-  updateMessageOrIssue = (key,message,index) => {
-    let number=index;
+  updateMessageOrIssueOrTenant = (key,message,index) => {
     
-  const updatedMessage=[...this.state.messages]; // updatedMessage.slice()
+  const updatedMessage=[...this.state[key]]; // updatedMessage.slice()
 
   if (index !=-1){
     updatedMessage[index] = message;
@@ -101,6 +101,8 @@ this.setState({
     this.setState({
       activeUser:null
     })
+
+    window.location.href="/#/logout"
   }
 
   login = (userObj) => {
@@ -113,16 +115,15 @@ this.setState({
   return (
     <div>
       <HashRouter>
-        <Container>
-
-          <Route exact path={['/','/messages','/tenants-accounts','/dashboard-messages']}>
+      
+          <Route exact path={['/','/messages','/tenants-accounts','/dashboard-messages','/logout','/dashboard-issues']}>
             <ManagementNavbar
               activeUser={this.state.activeUser}
               logout={this.logout}
             >
             </ManagementNavbar>
           </Route>
-         
+          <Container>
           <Route exact path='/login'>
             <LogIn
               buildingUsers={this.state.buildingUsers}
@@ -150,8 +151,8 @@ this.setState({
               addComments={this.addComments}
               addMessage={this.addMessage}
               allMessages={this.state.messages}
-              deleteMessage={this.deleteMessageOrIssue}
-              updateMessage={this.updateMessageOrIssue}
+              deleteMessage={this.deleteMessageOrIssueOrTenant}
+              updateMessage={this.updateMessageOrIssueOrTenant}
             
            >
            </DashboardMessages>
@@ -163,8 +164,8 @@ this.setState({
                addComments={this.addComments}
                addIssue={this.addIssues}
                allIssues={this.state.issues}
-               updateIssue={this.updateMessageOrIssue}
-               deleteIssue={this.deleteMessageOrIssue}
+               updateIssue={this.updateMessageOrIssueOrTenant}
+               deleteIssue={this.deleteMessageOrIssueOrTenant}
              >
            </DashboardIssues>
            </Route>
@@ -172,8 +173,14 @@ this.setState({
           <TenantsAccount
               addUser={this.addUser}
               buildingUsers={this.state.buildingUsers}
+              deleteTenantAccount={this.deleteMessageOrIssueOrTenant}
+              updateTenantAccount={this.updateMessageOrIssueOrTenant}
            >
            </TenantsAccount>
+        </Route>
+
+        <Route exact path='/logout'>
+         <LogOut></LogOut>
         </Route>
 
         <Route exact path='/'>

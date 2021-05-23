@@ -8,17 +8,12 @@ class LogOut extends React.Component{
     
     }
 
-    logout = () => {
-        this.props.logout()
-    }
-
 render(){
 
-    {this.props.logout()}
     return(
         <div>
             <Jumbotron>
-            See you soon!...
+            Hope to See you soon!...
             </Jumbotron>
         </div>
     )

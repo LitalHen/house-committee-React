@@ -3,6 +3,7 @@ import MessagesComments from './MessagesComments';
 import {Container, Form, Jumbotron} from 'react-bootstrap';
 import MessageIssueComponent from './MessageIssueComponent';
 import { v4 as uuidv4 } from 'uuid';
+import './DashboardMessagesStyle.css';
 
 class DashboardMessages extends React.Component{
 
@@ -59,7 +60,8 @@ render(){
                 //allcomments from app, to map all comments for each message
                 //addComment func from current component to add new comment to json
                 //active user-for user name
-                return <MessagesComments
+                return <div key={index}>
+                    <MessagesComments
                         index={index}
                         message={filteredMessage}
                         allComments={this.props.allComments}
@@ -70,7 +72,8 @@ render(){
                         allMessages={this.props.allMessages}
                         updateMessage={this.updateMessage}
                         
-                        />                       
+                        />  
+                        </div>                     
                    })
 
                                     
@@ -86,7 +89,7 @@ render(){
                         <option value="info">Info</option>
                 </Form.Control> 
 
-                <Container style={{width:"500px", margin:"0px"}}>                   
+                <div>                   
                      <Jumbotron>
                          Messages
                      </Jumbotron>
@@ -96,8 +99,9 @@ render(){
                      <MessageIssueComponent
                          addNewItem={this.addNewMessage}
                          type="message"
+                         activeUser={this.props.activeUser}
                      />
-                </Container>
+                </div>
         </div>
      )
     }

@@ -2,6 +2,7 @@ import React from 'react'
 import { Form, Jumbotron, Container } from 'react-bootstrap';
 import IssuesComments from './IssuesComments';
 import MessageIssueComponent from './MessageIssueComponent';
+import { v4 as uuidv4 } from 'uuid';
 
 class DashboardIssues extends React.Component{
 
@@ -18,8 +19,10 @@ class DashboardIssues extends React.Component{
         //from modal
         const issue={
             ...newIssue,
+            id: uuidv4(),
             date: new Date(),
-            id: this.props.activeUser.id
+            ownerId: this.props.activeUser.id,
+
         }
         console.log(issue.date)
     this.props.addIssue(issue);
@@ -66,7 +69,7 @@ render(){
     return(
 
         <div>    
-        <Container style={{width:"500px", margin:"0px"}}>                   
+                    
                      <Jumbotron>
                          Issues
                      </Jumbotron>
@@ -84,8 +87,9 @@ render(){
                      <MessageIssueComponent
                           addNewItem={this.addNewIssue}
                           type="issue"
+                          activeUser={this.props.activeUser}
                      />
-                </Container>
+            
         </div>
 
         

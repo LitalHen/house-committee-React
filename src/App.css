@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 } */
+.mr-auto{
+  margin-right: auto;
+}
+
+.ml-auto{
+  margin-left: auto;
+}
+
+.message-img{
+  width: 200px;
+  height: 200px;
+}

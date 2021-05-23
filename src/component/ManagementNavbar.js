@@ -8,7 +8,7 @@ class ManagementNavbar extends React.Component{
     }
 
 render(){
-        const logout=(this.props.activeUser)? <Nav.Link href="/#/" onClick={() => {this.props.logout()}}>Logout</Nav.Link>: null
+        const logout=(this.props.activeUser)? <Nav.Link href="/#/logout" onClick={() => {this.props.logout()}}>Logout</Nav.Link>: null
         const login=(!this.props.activeUser)? <Nav.Link href="/#/login">Login</Nav.Link>:null
         const signup=(!this.props.activeUser)? <Nav.Link href="/#/signup">Signup</Nav.Link>: null
         const userName=(this.props.activeUser)?<Nav.Link>{this.props.activeUser.name}</Nav.Link>:null
@@ -22,8 +22,8 @@ render(){
             <Navbar bg="primary" sm={6} md={4} lg={3} variant="dark">
                 <Navbar.Brand href="#home">HOA System</Navbar.Brand>
                 <Nav className="mr-auto">
-                   {signup}
-                  {tenantsAccount}
+                  {(this.props.activeUser && this.props.activeUser.owner) && (signup)}
+                  {(this.props.activeUser && this.props.activeUser.owner) && (tenantsAccount)}
                    {dashboardMessages}
                    {dashboardIssues}
                 </Nav>

@@ -1,6 +1,5 @@
 import React from 'react'
-import { Form, Button, Accordion, Card, Modal, Col, Container} from 'react-bootstrap';
-// import Messages from './Messages';
+import { Form, Button, Accordion, Card, Modal, Col, Container, Row} from 'react-bootstrap';
 
 class MessagesComments extends React.Component{
 
@@ -107,9 +106,10 @@ class MessagesComments extends React.Component{
 render(){
     return(
               
-        <Container sm={6} md={4} lg={3} key= {this.props.message.id} style={{marginTop:'20px'}}>
+        <div>
+<Container sm={6} md={4} lg={3}>
          {/* show each message in accordion view, message from DashboardMessages after filter and map */}
-          <Accordion>
+          <Accordion sm={12} md={6} lg={2} >
             <Card>
                 <Card.Header>
                      <Accordion.Toggle as={Button} variant="link" eventKey="0">
@@ -120,30 +120,38 @@ render(){
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                      <Card.Body>
-                        <h6>{this.props.message.title}</h6>
-                        <p>Priority: {this.props.message.priority} </p>
-                        <p>Details: {this.props.message.details}</p>
-                        <img src={this.props.message.img}/>
-                    <div>
-                      {(this.props.activeUser.owner) && <Button type="button" onClick={()=>{this.editMessage(this.props.index)}}>Edit Message</Button>}
-                    </div>  
-               
-                
+                         <Row>
+                        <Col>
+                             <img className="message-img" src={this.props.message.img}/>
+                        </Col>
+                        <Col>
+                             <h6>{this.props.message.title}</h6>
+                             <p>Priority: {this.props.message.priority} </p>
+                             <p>Details: {this.props.message.details}</p>
+
+                            <div>
+                            {(this.props.activeUser.owner) && <Button type="button" onClick={()=>{this.editMessage(this.props.index)}}>Edit Message</Button>}
+                            </div>  
+                        </Col>
+                    <Col>
                 {this.props.allComments.filter((comment)=>{
                  // get allComments(json from app) from DashboardMessages and filtered to get the comment for currect message
                 return comment.messageId === this.props.message.id && comment.type === "message"
 
                 }).map((messageComment)=>{
                 // map the filtered comments
-                return <div key= {messageComment.id} style={{border:'1px solid black'}}>
+                return   <div key= {messageComment.id} style={{border:'1px solid black'}}>
                            <div style={{backgroundColor:"lightgrey", height:'40px'}}>
                                <h6>{messageComment.userName} </h6>
                             </div>
                                 <p>{messageComment.comment}</p>
                         </div>
+                       
                   })
+                  
                 }
-
+                  </Col>
+                 </Row>
                         <Form.Control value={this.state.comment}  as="textarea" rows={2} type="text" onChange={(event)=>{this.formInput("comment",event.target.value)}}placeholder="Enter comment" />  
                         <Button onClick={()=> {this.addComment(this.props.message.id)}}>
                                 Add comment
@@ -191,10 +199,8 @@ render(){
         </Modal.Footer>
       </Modal>
         </div>
- 
-                
-  
-    </Container>
+        </Container>
+        </div>
 
     )
 
@@ -206,13 +212,3 @@ render(){
 }
 
 export default MessagesComments
-{/* <Messages
-messageId={this.state.id}
-title={this.props.message.title}
-priority={this.props.message.priority}
-details={this.props.message.details}
-img={this.props.message.img}
-allMessages={this.props.allMessages}
-addNewItem={this.props.addNewItem}
-isUpdateMessage={this.state.isUpdateMessage}
-/>   */}

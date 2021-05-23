@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Button, Form, Accordion,Card, Col,Modal, Container } from 'react-bootstrap';
+import { Button, Form, Accordion,Card, Col,Modal, Container, Row } from 'react-bootstrap';
 
 
 class IssuesComments extends React.Component{
@@ -17,7 +17,8 @@ class IssuesComments extends React.Component{
             img:'',
             id:'',
             index: '',
-            status:''
+            status:'',
+            ownerId:''
         }
     }
 
@@ -45,7 +46,8 @@ class IssuesComments extends React.Component{
             img:this.props.issue.img,
             id: this.props.issue.id,
             index: index,
-            status:this.props.issue.status            
+            status:this.props.issue.status,
+            ownerId:this.props.issue.ownerId            
         })
 
     }
@@ -78,7 +80,8 @@ class IssuesComments extends React.Component{
             priority:this.state.priority,
             img:this.state.img,
             id: this.state.id,
-            status: this.state.status
+            status: this.state.status,
+            ownerId: this.state.ownerId
         }
         
         this.props.updateIssue('issues',updatedIssue, this.state.index)
@@ -126,7 +129,7 @@ render(){
 
     return(
 
-        <Container sm={6} md={4} lg={3} key= {this.props.issue.id} style={{marginTop:'20px'}}>
+        <Container sm={6} md={4} lg={3}>
             <Accordion>
                <Card>
                  <Card.Header>
@@ -138,8 +141,9 @@ render(){
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                      <Card.Body>
-                         <p>Status:{this.props.issue.status}</p>
-                        <h4>{this.props.issue.title}</h4>
+                         <Row>
+                             <Col><p>Status:{this.props.issue.status}</p></Col>
+                       <Col> <h4>{this.props.issue.title}</h4></Col></Row>
                         <p>Priority:{this.props.issue.priority} </p>
                         <p>Details:{this.props.issue.details}</p>
                         <img src={this.props.issue.img}/>
