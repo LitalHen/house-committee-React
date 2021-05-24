@@ -81,7 +81,8 @@ class IssuesComments extends React.Component{
             img:this.state.img,
             id: this.state.id,
             status: this.state.status,
-            ownerId: this.state.ownerId
+            ownerId: this.state.ownerId,
+            createdBy: this.props.activeUser.name
         }
         
         this.props.updateIssue('issues',updatedIssue, this.state.index)
@@ -137,19 +138,34 @@ render(){
                           {this.props.issue.title}
                          
                     </Accordion.Toggle>
-                 {(this.props.activeUser.id === this.props.issue.ownerId) &&  <Button type="button" onClick={()=>{this.deleteIssues(this.props.index)}}>delete</Button>}
+
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                      <Card.Body>
                          <Row>
-                             <Col><p>Status:{this.props.issue.status}</p></Col>
-                       <Col> <h4>{this.props.issue.title}</h4></Col></Row>
-                        <p>Priority:{this.props.issue.priority} </p>
-                        <p>Details:{this.props.issue.details}</p>
-                        <img src={this.props.issue.img}/>
+                            <Col>
+                            {(this.props.issue.img !== '') ? <img className="message-img" src={this.props.issue.img}/> : <img className="message-img" src={"https://static.vecteezy.com/system/resources/thumbnails/001/970/338/small/building-under-construction-site-free-vector.jpg"} />}
+                           <p>Created By: {this.props.issue.name}</p>
+                            <div className="remove-message">
+                            {(this.props.activeUser.id === this.props.issue.ownerId) &&  <Button type="button" variant="danger" onClick={()=>{this.deleteIssues(this.props.index)}}>Remove Issue</Button>}
+                           </div>
+                            </Col>
+                            <Col><h4>{this.props.issue.title}</h4>
+                                  <p>Status:{this.props.issue.status}</p>
+                                  <p>Priority:{this.props.issue.priority} </p>
+                                  <p>Details:{this.props.issue.details}</p>
                       <div>
                              {(this.props.activeUser.id === this.props.issue.ownerId) && <Button type="button" onClick={()=>{this.editIssue(this.props.index)}}>Edit Issue</Button>}
                        </div>
+                        <div className="add-comment">
+                            <Form.Control value={this.state.comment}  as="textarea" rows={2} type="text" onChange={(event)=>{this.formInput("comment",event.target.value)}}placeholder="Enter comment" />  
+                            </div>
+                           <Button onClick={()=> {this.addComment(this.props.issue.id)}}>
+                                Add comment
+                        </Button>
+                       </Col>
+                       <Col>
+                       <h4>Join Discussion</h4>
                  {
                         
                      this.props.allComments.filter((comment)=>{
@@ -157,10 +173,10 @@ render(){
                      })
                      
                      .map((issueComments) => {
-                        return <div key= {issueComments.id} style={{border:'1px solid black'}}>
-
-                                   <div style={{backgroundColor:"lightgrey", height:'40px'}}>
-                                       <h6>{issueComments.userName} </h6>
+                        return <div key= {issueComments.id} className="comments-border">
+                                   
+                                   <div className="comments">
+                                       <h5>{issueComments.userName} </h5>
                                 </div>
                                   <p>{issueComments.comment}</p>
                           </div>
@@ -168,10 +184,9 @@ render(){
 
 
                      }
-                        <Form.Control value={this.state.comment}  as="textarea" rows={2} type="text" onChange={(event)=>{this.formInput("comment",event.target.value)}}placeholder="Enter comment" />  
-                        <Button onClick={()=> {this.addComment(this.props.issue.id)}}>
-                                Add comment
-                        </Button>
+                       </Col>
+                      </Row>
+
 
                 </Card.Body>
                 </Accordion.Collapse>

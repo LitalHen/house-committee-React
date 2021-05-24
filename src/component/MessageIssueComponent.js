@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button,  Col, Form, Modal } from 'react-bootstrap';
+import { Button,  Col, Form, InputGroup, Modal } from 'react-bootstrap';
 class MessageIssueComponent extends React.Component{
 //modal input for both message and issues component- generic component
     constructor(props){
@@ -11,7 +11,9 @@ class MessageIssueComponent extends React.Component{
             details:'',
             priority:'',
             img:'',
-            status:'open'
+            status:'open',
+            validated: false,
+            setValidated : false
         }
     }
 
@@ -22,6 +24,10 @@ class MessageIssueComponent extends React.Component{
      }
 
     submitNewMessage = () => {
+        
+        this.setState({
+            setValidated:true
+        })
 
         const newMessage={
             title: this.state.title,
@@ -61,7 +67,9 @@ render(){
         <div>
             {(this.props.type==="message" && this.props.activeUser.owner) &&   <Button type="button" onClick={()=>{this.setState({ismodalOpen:true})}}>Add Message</Button>}
             {this.props.type==="issue"  && <Button type="button" onClick={()=>{this.setState({ismodalOpen:true})}}>Add Issue</Button>}
+          
             <Modal show={this.state.ismodalOpen} onHide={this.handleClose}>
+              <Form noValidate validated={this.state.validated}>
                 <Modal.Header closeButton>
                 {this.props.type==="message" && <Modal.Title>Create Message </Modal.Title>}
                 {this.props.type==="issue"  && <Modal.Title>Create Issue </Modal.Title>}
@@ -69,11 +77,20 @@ render(){
                 <Modal.Body>
                     <Col sm={10}>   
                         <Form.Label>Title</Form.Label>
-                        <Form.Control type="text" value={this.state.title} onChange={(event)=>{this.formInput("title",event.target.value)}}placeholder="Enter title" />
+                        <InputGroup hasValidation>
+                        <Form.Control type="text" value={this.state.title} required onChange={(event)=>{this.formInput("title",event.target.value)}}placeholder="Enter title" />
+                        <Form.Control.Feedback type="invalid">
+                         Please provide title
+                       </Form.Control.Feedback>
+                       </InputGroup>
                     </Col>
+
                     <Col sm={10}> 
-                        <Form.Label>Description</Form.Label>
+                        <Form.Label>Details</Form.Label>
                         <Form.Control  as="textarea" value={this.state.details} rows={3} type="text" onChange={(event)=>{this.formInput("details",event.target.value)}}placeholder="Enter description" />  
+                        <Form.Control.Feedback type="invalid">
+                         Please provide details
+                       </Form.Control.Feedback>
                     </Col>
                     <Col sm={10}>   
                     <Form.Label>Priority</Form.Label>
@@ -91,6 +108,9 @@ render(){
                                 <option value="close">Close</option>
                                 </Form.Control>
                            }
+                           <Form.Control.Feedback type="invalid">
+                             Please provide priority
+                            </Form.Control.Feedback>
                     </Col>
                     <Col sm={10}> 
                     <Form.Label>Upload Img</Form.Label>
@@ -106,7 +126,9 @@ render(){
                     submit
                 </Button>
                 </Modal.Footer>
+                </Form>
             </Modal>
+            
 </div>
     )
 }

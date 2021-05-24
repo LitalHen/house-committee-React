@@ -1,6 +1,6 @@
 import React from 'react'
 import MessagesComments from './MessagesComments';
-import {Container, Form, Jumbotron} from 'react-bootstrap';
+import {Container, Form, Jumbotron, Button, Row, Col} from 'react-bootstrap';
 import MessageIssueComponent from './MessageIssueComponent';
 import { v4 as uuidv4 } from 'uuid';
 import './DashboardMessagesStyle.css';
@@ -52,8 +52,8 @@ render(){
             const messages= this.props.allMessages.filter((Messages)=>{
                 // get allmessages json data, filter-get the filtered array of obj by search box or by priority selected
               return ((Messages.priority === this.state.filter || this.state.filter === "") &&
-              Messages.title.includes(this.state.search) && 
-              Messages.details.includes(this.state.search))
+              (Messages.title.toLowerCase()).includes(this.state.search.toLowerCase()) && 
+              (Messages.details.toLowerCase()).includes(this.state.search.toLowerCase()))
             }).map(( filteredMessage, index) => {
                 //map on filtered array of obj-> message
                 //send each message to messagesComponent
@@ -80,27 +80,36 @@ render(){
     return(
 
         <div>
-            <Form.Label>Seacrh</Form.Label>
-                <Form.Control type="text" value={this.state.search} onChange={(event)=>{this.formInput('search', event.target.value)}}placeholder="search message" />
-            <Form.Label>Filter By Priority</Form.Label>
-                <Form.Control as="select" value={this.state.filter} onChange={(event)=>{this.formInput('filter', event.target.value)}}>
-                        <option value="">view all messages</option>
+            <Container>
+            <Row>
+                 <Col>
+                 <Form.Group className="group-search">
+                     <Form.Control type="text" style={{backgroundImage: "url(img/magnifying-glass-189254_960_720.png)", position:'right',backgroundSize:'20px',backgroundRepeat:'no-repeat',borderRadius:'8px',backgroundPosition:'right'}} value={this.state.search} onChange={(event)=>{this.formInput('search', event.target.value)}}placeholder="search message" /> 
+                </Form.Group>
+                </Col>
+                  <Col>
+                  <Form.Group className="group-search">
+                <Form.Control className="select-message" as="select" value={this.state.filter} onChange={(event)=>{this.formInput('filter', event.target.value)}}>
+                        <option value="">fliter messages</option>
                         <option value="important">Important</option>
                         <option value="info">Info</option>
                 </Form.Control> 
+                </Form.Group>
+                </Col>
+            </Row>
+            </Container>
 
                 <div>                   
-                     <Jumbotron>
-                         Messages
-                     </Jumbotron>
                      {/* show messages, all or filtered */}
                          {messages}
                      {/* send the submitMessage func from current component to modal- add new message */}
+                     <div className="messages-display">
                      <MessageIssueComponent
                          addNewItem={this.addNewMessage}
                          type="message"
                          activeUser={this.props.activeUser}
                      />
+                     </div>
                 </div>
         </div>
      )

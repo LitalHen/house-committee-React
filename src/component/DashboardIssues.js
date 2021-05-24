@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Jumbotron, Container } from 'react-bootstrap';
+import { Form, Jumbotron, Container, Row, Col } from 'react-bootstrap';
 import IssuesComments from './IssuesComments';
 import MessageIssueComponent from './MessageIssueComponent';
 import { v4 as uuidv4 } from 'uuid';
@@ -17,14 +17,24 @@ class DashboardIssues extends React.Component{
 
     addNewIssue = (newIssue) => {
         //from modal
+        let priority=0;
+        if (newIssue.priority == "normal"){
+            priority=1;
+        }
+        else if (newIssue.priority == "important"){
+            priority=2;
+        }
+        else if (newIssue.priority == "urgent"){
+            priority=3;
+        }
         const issue={
             ...newIssue,
             id: uuidv4(),
             date: new Date(),
             ownerId: this.props.activeUser.id,
-
+            priorityId:priority
         }
-        console.log(issue.date)
+      
     this.props.addIssue(issue);
 
 }
@@ -69,27 +79,34 @@ render(){
     return(
 
         <div>    
-                    
-                     <Jumbotron>
-                         Issues
-                     </Jumbotron>
-                     
-                     <Form.Label>Filter By Priority</Form.Label>
+                       
+                  <Container>
+                     <Row>
+                         <Col>
+                         <Form.Group className="group-search">
                        {this.props.activeUser.owner &&
-                       <Form.Control as="select" value={this.state.sortBy} onChange={(event)=>{this.sortedBy(event.target.value)}}>
+                       <Form.Control className="select-message" as="select" value={this.state.sortBy} onChange={(event)=>{this.sortedBy(event.target.value)}}>
                         <option value="">sorted by</option>
                         <option value="priority">Priority</option>
                         <option value="date">Date</option>
                 </Form.Control> }
+                </Form.Group>
+                </Col>
+                </Row>
+                </Container>
+                <div>
                      {/* show messages, all or filtered */}
                          {issues}
                      {/* send the submitMessage func from current component to modal- add new message */}
+                   
+                     <div className="messages-display">
                      <MessageIssueComponent
                           addNewItem={this.addNewIssue}
                           type="issue"
                           activeUser={this.props.activeUser}
                      />
-            
+                     </div> 
+                     </div> 
         </div>
 
         

@@ -73,7 +73,8 @@ class MessagesComments extends React.Component{
                 details:this.state.details,
                 priority:this.state.priority,
                 img:this.state.img,
-                id: this.state.id
+                id: this.state.id,
+                createdBy: this.props.activeUser.name
             }
             
             this.props.updateMessage('messages',updatedMessage, this.state.index)
@@ -107,42 +108,53 @@ render(){
     return(
               
         <div>
-<Container sm={6} md={4} lg={3}>
+    <Container sm={6} md={4} lg={3}>
          {/* show each message in accordion view, message from DashboardMessages after filter and map */}
-          <Accordion sm={12} md={6} lg={2} >
+          <Accordion>
             <Card>
                 <Card.Header>
                      <Accordion.Toggle as={Button} variant="link" eventKey="0">
                           {this.props.message.title}
                          
                     </Accordion.Toggle>
-                    {(this.props.activeUser.owner) && <Button type="button" onClick={()=>{this.deleteMessage(this.props.index)}}>delete</Button>}
+                  
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                      <Card.Body>
                          <Row>
                         <Col>
-                             <img className="message-img" src={this.props.message.img}/>
+                             {(this.props.message.img !== '') ? <img className="message-img" src={this.props.message.img}/> : <img className="message-img" src={"https://static.vecteezy.com/system/resources/thumbnails/001/970/338/small/building-under-construction-site-free-vector.jpg"} />}
+                             <p>Created By: {this.props.message.createdBy}</p>
+                             <div className="remove-message">
+                             {(this.props.activeUser.owner) && <Button type="button" variant="danger" onClick={()=>{this.deleteMessage(this.props.index)}}>Remove Message</Button>}
+                             </div>
                         </Col>
-                        <Col>
-                             <h6>{this.props.message.title}</h6>
+                        <Col className="message-content">
+                             <h4>{this.props.message.title}</h4>
                              <p>Priority: {this.props.message.priority} </p>
                              <p>Details: {this.props.message.details}</p>
-
                             <div>
                             {(this.props.activeUser.owner) && <Button type="button" onClick={()=>{this.editMessage(this.props.index)}}>Edit Message</Button>}
                             </div>  
+                            <div className="add-comment">
+                            <Form.Control value={this.state.comment}  as="textarea" rows={2} type="text" onChange={(event)=>{this.formInput("comment",event.target.value)}}placeholder="Enter comment" />  
+                            </div>
+                           <Button onClick={()=> {this.addComment(this.props.message.id)}}>
+                                Add comment
+                        </Button>
+                      
                         </Col>
                     <Col>
+                    <h4>Join Discussion</h4>
                 {this.props.allComments.filter((comment)=>{
                  // get allComments(json from app) from DashboardMessages and filtered to get the comment for currect message
                 return comment.messageId === this.props.message.id && comment.type === "message"
 
                 }).map((messageComment)=>{
                 // map the filtered comments
-                return   <div key= {messageComment.id} style={{border:'1px solid black'}}>
-                           <div style={{backgroundColor:"lightgrey", height:'40px'}}>
-                               <h6>{messageComment.userName} </h6>
+                return   <div key= {messageComment.id} className="comments-border">
+                           <div className="comments">
+                               <h5>{messageComment.userName} </h5>
                             </div>
                                 <p>{messageComment.comment}</p>
                         </div>
@@ -150,12 +162,9 @@ render(){
                   })
                   
                 }
-                  </Col>
-                 </Row>
-                        <Form.Control value={this.state.comment}  as="textarea" rows={2} type="text" onChange={(event)=>{this.formInput("comment",event.target.value)}}placeholder="Enter comment" />  
-                        <Button onClick={()=> {this.addComment(this.props.message.id)}}>
-                                Add comment
-                        </Button>
+                
+                        </Col>
+                        </Row>
                     </Card.Body>
                 </Accordion.Collapse>
             </Card>

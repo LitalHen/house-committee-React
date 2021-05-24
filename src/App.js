@@ -14,6 +14,7 @@ import TenantsAccount from './pages/TenantsAccount';
 import commentsJSON from './data/comments.json';
 import DashboardIssues from './component/DashboardIssues';
 import LogOut from './pages/LogOut';
+import './App.css'
 
 class App extends React.Component{
   constructor(props){

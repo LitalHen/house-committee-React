@@ -1,4 +1,5 @@
 import React from 'react'
+import FormExample from '../component/Messages'
 
 class HomePage extends React.Component{
 
@@ -7,7 +8,8 @@ class HomePage extends React.Component{
     // }
 render(){
     return(
-        <div></div>
+        <div>
+        </div>
     )
 }
     

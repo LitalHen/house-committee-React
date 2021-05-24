@@ -36,6 +36,12 @@
     transform: rotate(360deg);
   }
 } */
+
+*{
+  box-sizing: border-box;
+  margin:0px;
+  padding: 0px;
+}
 .mr-auto{
   margin-right: auto;
 }
@@ -45,6 +51,39 @@
 }
 
 .message-img{
-  width: 200px;
-  height: 200px;
+  width: 20rem;
+  height: 15rem;
+}
+
+.group-search{
+      width:80%;
+      height: 25px;
+      margin:20px 5px 50px 0;
+      border: none; /* <-- This thing here */
+      border-radius: 10px;      
+}
+
+.select-message{
+  background-color: white !important;
+}
+
+.messages-display{
+
+  margin-top: 20px;
+}
+
+.add-comment, .remove-message{
+
+  margin-top: 20px;
+  margin-bottom:10px;
+}
+
+.comments{
+  background-color:lightseagreen;
+  height:30px;
+  font-size: 8px;
+}
+
+.comments-border{
+  border:1px solid turquoise
 }
