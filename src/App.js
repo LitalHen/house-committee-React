@@ -25,16 +25,16 @@ class App extends React.Component{
       comments:commentsJSON,
       buildingUsers:usersJSON,
       messages:messagesJSON,
-      // activeUser:null
-      activeUser:{
-        name: "lital hen",
-        email: "lital@gmail.com",
-        pwd: "123",
-        address:'Hertzel 2',
-        communityName:'Ahuzot HaNassi',
-        owner:true,
-        id:"owner-Ahuzot HaNassi"
-      },
+      activeUser:null
+      // activeUser:{
+      //   name: "lital hen",
+      //   email: "lital@gmail.com",
+      //   pwd: "123",
+      //   address:'Hertzel 2',
+      //   communityName:'Ahuzot HaNassi',
+      //   owner:true,
+      //   id:"owner-Ahuzot HaNassi"
+      // },
       // activeUser:{
       //   name: "lital",
       //   email: "lital@gmail.com",
