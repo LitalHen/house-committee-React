@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Jumbotron, Button } from 'react-bootstrap';
+import { Form, Jumbotron, Button, Container } from 'react-bootstrap';
 
 class SignUp extends React.Component{
 
@@ -52,43 +52,45 @@ class SignUp extends React.Component{
 render(){
 
     return(
-        <div>
-            <Jumbotron>
-                Sign Up
-            </Jumbotron>
-
+        <div className="signup-img-form">
+            <div>
+            <img  className="signup-img" src="https://i.pinimg.com/originals/eb/bc/f9/ebbcf97df874668df83e093f3297a4af.jpg" alt="lobby picture"/>
+            </div>
+            <div className="signup-form">
+                <h3>Sign Up To Your Building</h3>
+    
             <Form>
+            <Form.Group controlId="formBasicPassword">
+                    <Form.Label  className="signup-label">building community name</Form.Label>
+                    <Form.Control type="text"  onChange={(event)=>{this.formInput("communityName",event.target.value)}}placeholder="community name" />
+                </Form.Group>
+                
                 <Form.Group controlId="formBasicEmail">
-                <Form.Label>Name</Form.Label>
+                <Form.Label className="signup-label">Name</Form.Label>
                     <Form.Control type="text" onChange={(event)=>{this.formInput("name",event.target.value)}}placeholder="Enter full name" />
                 </Form.Group>
                 
                 <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label  className="signup-label">Email address</Form.Label>
                     <Form.Control type="email"  onChange={(event)=>{this.formInput("email",event.target.value)}}placeholder="Enter email" />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label  className="signup-label">Password</Form.Label>
                     <Form.Control type="password"  onChange={(event)=>{this.formInput("pwd",event.target.value)}}placeholder="Password" />
-                </Form.Group>
-
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>building community name</Form.Label>
-                    <Form.Control type="text"  onChange={(event)=>{this.formInput("communityName",event.target.value)}}placeholder="community name" />
                 </Form.Group>
                
                 <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Full address</Form.Label>
+                    <Form.Label  className="signup-label">Full address</Form.Label>
                     <Form.Control type="text"  onChange={(event)=>{this.formInput("address",event.target.value)}}placeholder="address" />
                 </Form.Group>
-                {/* <Form.Group controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group> */}
+                <div className="btn-signup">
                 <Button variant="success" type="button" onClick={this.signUp}>
                     create account!
                 </Button>
+                </div>
             </Form>
+            </div>
         </div>
     )
 }

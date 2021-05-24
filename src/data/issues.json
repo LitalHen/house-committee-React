@@ -2,26 +2,26 @@
     {
         "id":"1",
         "title":"Lobby door",
-        "details":"Door",
+        "details":"Door Fixed",
         "priority":"normal",
         "img":"",
         "priorityId":1,
         "ownerId":"owner-Ahuzot HaNassi",
-        "status":"open",
-        "date":"Sun May 22 2021 12:36:37 GMT+0300"
+        "status":"close",
+        "date":"Sun May 22 2021 12:36:37 GMT+0300 (Israel Daylight Time)"
         
     },
 
     {
         "id":"2",
-        "title":"Lobby clean",
-        "details":"Clean the lobby",
+        "title":"Lobby cleaning",
+        "details":"Lobby",
         "priority":"important",
-        "img":"",
+        "img":"https://lsn-staging.s3.wefew.io/201103%2F3501%2Fimage%2FHilton_Pataya_Hotel_by_Department_of_Architecture3.jpg?width=926&quality=80&crop%5Bx%5D=0&crop%5By%5D=406&crop%5Bwidth%5D=1280&crop%5Bheight%5D=1280&method=ratio",
         "priorityId":2,
         "ownerId":"mor levi7",
         "status":"close",
-        "date":"Sun May 21 2021 12:09:05 GMT+0300"
+        "date":"Sun May 21 2021 12:09:05 GMT+0300 (Israel Daylight Time)"
         
     }
 ]

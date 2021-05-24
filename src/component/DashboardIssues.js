@@ -82,14 +82,13 @@ render(){
                        
                   <Container>
                      <Row>
-                         <Col>
-                         <Form.Group className="group-search">
-                       {this.props.activeUser.owner &&
-                       <Form.Control className="select-message" as="select" value={this.state.sortBy} onChange={(event)=>{this.sortedBy(event.target.value)}}>
+                         <Col sm={10}>
+                         <Form.Group className="group-issue-search">
+                       <Form.Control className="select-issue" as="select" value={this.state.sortBy} onChange={(event)=>{this.sortedBy(event.target.value)}}>
                         <option value="">sorted by</option>
                         <option value="priority">Priority</option>
                         <option value="date">Date</option>
-                </Form.Control> }
+                </Form.Control> 
                 </Form.Group>
                 </Col>
                 </Row>

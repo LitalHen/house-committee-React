@@ -1,7 +1,7 @@
 
 import { Alert } from 'bootstrap';
 import React from 'react'
-import { Form, Jumbotron, Button } from 'react-bootstrap';
+import { Form, Jumbotron, Button, Col } from 'react-bootstrap';
 
 class LogIn extends React.Component{
 
@@ -46,30 +46,36 @@ class LogIn extends React.Component{
 
 render(){
 
-
+    
+  
+ 
     return(
-        <div>
-            <Jumbotron >
-              <h1>  Login </h1>
-            </Jumbotron>
+        <div className="logIn-img-form">
+         
+            <div   className="logIn-img">
+            <img src="https://www.miamiluxuryhomes.com/blog/wp-content/uploads/2014/08/One-Thousand-Museum-Condos-Skyline-View-at-Night.jpg" roundedCircle alt="building picture"></img>
+            </div>
+            <div className="logIn-form">
             <Form>
                 <Form.Group>
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label className="login-label">Email</Form.Label>
                         <Form.Control type="text" onChange={(event)=>{this.formInput("email",event.target.value)}}placeholder="Enter Email" />
                     </Form.Group>
 
                 <Form.Group>
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label className="login-label">Password</Form.Label>
                         <Form.Control type="password" onChange={(event)=>{this.formInput("pwd",event.target.value)}}placeholder="Enter Password" />
                     </Form.Group>
-
+                <div className="btn-login">
                 <Button variant="success" type="button" onClick={this.login}>
                    Login
                 </Button>
+                </div>
             </Form>
-            <div style={{color:"red"}}>
+            <div className="login-errMessage">
                 {this.state.errMessage}
 
+                </div>
                 </div>
         </div>
     )

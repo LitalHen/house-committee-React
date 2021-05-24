@@ -1,14 +1,16 @@
 import React from 'react'
-import FormExample from '../component/Messages'
+import DashboardIssues from '../component/DashboardIssues'
+import DashboardMessages from '../component/DashboardMessages'
 
 class HomePage extends React.Component{
 
-    // constructor(props){
-    //     super(props);
-    // }
+    constructor(props){
+        super(props);
+    }
 render(){
     return(
         <div>
+          
         </div>
     )
 }

@@ -145,7 +145,7 @@ render(){
                          <Row>
                             <Col>
                             {(this.props.issue.img !== '') ? <img className="message-img" src={this.props.issue.img}/> : <img className="message-img" src={"https://static.vecteezy.com/system/resources/thumbnails/001/970/338/small/building-under-construction-site-free-vector.jpg"} />}
-                           <p>Created By: {this.props.issue.name}</p>
+                           <p>Created By: {this.props.issue.ownerId}</p>
                             <div className="remove-message">
                             {(this.props.activeUser.id === this.props.issue.ownerId) &&  <Button type="button" variant="danger" onClick={()=>{this.deleteIssues(this.props.index)}}>Remove Issue</Button>}
                            </div>

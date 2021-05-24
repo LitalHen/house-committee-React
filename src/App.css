@@ -39,7 +39,7 @@
 
 *{
   box-sizing: border-box;
-  margin:0px;
+  margin:1px;
   padding: 0px;
 }
 .mr-auto{
@@ -55,18 +55,29 @@
   height: 15rem;
 }
 
-.group-search{
+.group-message-search{
       width:80%;
       height: 25px;
-      margin:20px 5px 50px 0;
+      margin:20px 20px 50px 60px;
       border: none; /* <-- This thing here */
       border-radius: 10px;      
+}
+
+.group-issue-search{
+  width:80%;
+  height: 25px;
+  margin:20px 5px 50px;
+  border: none; /* <-- This thing here */
+  border-radius: 10px; 
 }
 
 .select-message{
   background-color: white !important;
 }
 
+.select-issue{
+  width:30%;
+}
 .messages-display{
 
   margin-top: 20px;
@@ -86,4 +97,97 @@
 
 .comments-border{
   border:1px solid turquoise
+}
+
+.logIn-img-form, .signup-img-form{
+  position: relative;
+}
+
+.logIn-img, .signup-img{
+  position: absolute;
+  
+}
+
+.logIn-form{
+  position: absolute;
+  padding: 5px;
+  width:20%;
+  margin-top: 15rem;
+  margin-left: 32rem;
+  box-shadow: inset 0 0 2000px rgba(255, 255, 255, 100%);
+   
+}
+
+.signup-form{
+  position: absolute;
+  margin-top:2rem;
+  margin-left:17rem;
+  width:50rem;
+  box-shadow: inset 0 0 2000px rgba(255, 255, 255, 150%);
+   
+}
+
+.login-label{
+  color:rgb(6, 6, 49);
+  font-weight: bold;
+  font-size: 20px;
+
+}
+
+.login-errMessage{
+  font-weight: bolder;
+  font-size: 20px;
+  color: rgb(6, 6, 49);
+
+}
+
+.btn-login{
+  margin-top: 15px;
+  text-align: center;
+}
+
+.btn-newMessage{
+  margin-left:11px
+}
+
+
+.signup-form > h3{
+  margin-bottom: 40px;
+  text-align: center;
+  color:rgb(6, 6, 49);
+}
+
+.btn-signup{
+  margin-top: 10px;
+}
+
+.navbar-brand{
+
+  padding-left:10px;
+}
+
+.btn-tenant-account{
+  margin-right:5px
+}
+
+.tenant-account{
+
+  margin-top: 20px;
+}
+
+.signup-label{
+
+  color:rgb(6, 6, 65);
+  font-weight: bolder;
+
+}
+
+ .signup-img{
+
+  width:89rem;
+
+} 
+
+.logIn-img{
+  width:89rem
 }

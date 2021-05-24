@@ -65,9 +65,10 @@ render(){
     return(
         
         <div>
+            <div className="btn-newMessage">
             {(this.props.type==="message" && this.props.activeUser.owner) &&   <Button type="button" onClick={()=>{this.setState({ismodalOpen:true})}}>Add Message</Button>}
             {this.props.type==="issue"  && <Button type="button" onClick={()=>{this.setState({ismodalOpen:true})}}>Add Issue</Button>}
-          
+            </div>
             <Modal show={this.state.ismodalOpen} onHide={this.handleClose}>
               <Form noValidate validated={this.state.validated}>
                 <Modal.Header closeButton>

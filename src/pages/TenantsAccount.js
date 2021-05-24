@@ -1,5 +1,5 @@
 import React from 'react'
-import { Accordion, Button, Card, Col, Container, Form, Jumbotron,  Modal} from 'react-bootstrap';
+import { Accordion, Button, Card, Col, Container, Form, Jumbotron,  Modal, Row} from 'react-bootstrap';
 // import { v4 as uuid } from 'uuid';
 
 class TenantsAccount extends React.Component{
@@ -138,12 +138,18 @@ class TenantsAccount extends React.Component{
                         </Card.Header>
                             <Accordion.Collapse eventKey="0">
                           <Card.Body>
-                            <h6>Tenant Name:</h6> {tenant.name}   
-                            <h6>Tenant Email:</h6> {tenant.email}  
-                            <h6>Tenant Password:</h6> {tenant.pwd}  
-                            <h6>Tenant Apt Number:</h6> {tenant.aptNumber}    
-                            <Button variant="danger" type="button" onClick={()=>{this.deleteTenantAccount(index)}}>Delete Account</Button>
+                              <Row>
+                            <p>Tenant Name: {tenant.name}</p>  
+                            <p>Tenant Email: {tenant.email}</p>
+                            <p>Tenant Password: {tenant.pwd}</p>
+                            <p>Tenant Apt Number: {tenant.aptNumber}</p>    
+                            </Row>
+                            <Row>
+                                <Col>
+                            <Button className="btn-tenant-account" variant="danger" type="button" onClick={()=>{this.deleteTenantAccount(index)}}>Delete Account</Button>
                             <Button variant="info" type="button" onClick={()=>{this.editTenant(index)}}>Edit Account</Button>
+                            </Col>
+                            </Row>
                           </Card.Body>
                         </Accordion.Collapse>
                         </Card>
@@ -151,7 +157,8 @@ class TenantsAccount extends React.Component{
                 })
             
                 return(     
-                    <Container>
+                    <Container className="tenant-account">
+                        <h3>Add tenant to your building</h3>
                     <Form>
                     <Form.Group>
                         <Form.Label>Name</Form.Label>
@@ -206,14 +213,14 @@ class TenantsAccount extends React.Component{
         </Modal.Footer>
       </Modal>
         </div>
-                  
-                        <Jumbotron>
-                           All Tenants Users
-                      </Jumbotron>
+                  <div className="tenant-account">
+                        <h3>
+                           All Tenants Account
+                      </h3>
                   
                         
                              {tenantsTable}
- 
+                             </div>
                 </Container>
                     
                     

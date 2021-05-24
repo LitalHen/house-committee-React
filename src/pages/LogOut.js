@@ -1,5 +1,5 @@
 import React from 'react'
-import { Jumbotron } from 'react-bootstrap';
+import { Container} from 'react-bootstrap';
 
 class LogOut extends React.Component{
 
@@ -12,9 +12,11 @@ render(){
 
     return(
         <div>
-            <Jumbotron>
+            <Container>
+                <h2>
             Hope to See you soon!...
-            </Jumbotron>
+            </h2>
+            </Container>
         </div>
     )
 }

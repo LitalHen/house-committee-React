@@ -83,12 +83,12 @@ render(){
             <Container>
             <Row>
                  <Col>
-                 <Form.Group className="group-search">
-                     <Form.Control type="text" style={{backgroundImage: "url(img/magnifying-glass-189254_960_720.png)", position:'right',backgroundSize:'20px',backgroundRepeat:'no-repeat',borderRadius:'8px',backgroundPosition:'right'}} value={this.state.search} onChange={(event)=>{this.formInput('search', event.target.value)}}placeholder="search message" /> 
+                 <Form.Group className="group-message-search">
+                     <Form.Control type="text" style={{backgroundImage: "url(img/magnifying-glass-189254_960_720.png)", position:'right',backgroundSize:'18px',backgroundRepeat:'no-repeat',borderRadius:'5px',backgroundPosition:'right'}} value={this.state.search} onChange={(event)=>{this.formInput('search', event.target.value)}}placeholder="search message" /> 
                 </Form.Group>
                 </Col>
                   <Col>
-                  <Form.Group className="group-search">
+                  <Form.Group className="group-message-search">
                 <Form.Control className="select-message" as="select" value={this.state.filter} onChange={(event)=>{this.formInput('filter', event.target.value)}}>
                         <option value="">fliter messages</option>
                         <option value="important">Important</option>

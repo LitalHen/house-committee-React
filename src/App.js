@@ -185,7 +185,9 @@ this.setState({
         </Route>
 
         <Route exact path='/'>
-         <HomePage></HomePage>
+         <HomePage>
+           
+         </HomePage>
         </Route>
 
         </Container>

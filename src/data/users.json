@@ -1,7 +1,7 @@
 [
     {
         "id":"owner-Ahuzot HaNassi",
-        "name":"lital",
+        "name":"Lital Hen",
         "email":"lital@gmail.com",
         "pwd":"1234",
         "owner":true,
@@ -12,7 +12,7 @@
 
     {
         "id":"mor levi7",
-        "name":"mor levi",
+        "name":"Mor Levi",
         "email":"mor@gmail.com",
         "pwd":"Aa1234Z3",
         "owner":false,
