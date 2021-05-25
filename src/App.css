@@ -189,6 +189,10 @@
 } 
 
 .logIn-img{
-  width:89rem;
+  width:80rem;
   height:50rem
+}
+
+.dashboard{
+  margin: 30px 0 20px 20px;
 }

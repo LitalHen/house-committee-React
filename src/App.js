@@ -25,16 +25,16 @@ class App extends React.Component{
       comments:commentsJSON,
       buildingUsers:usersJSON,
       messages:messagesJSON,
-      activeUser:null
-      // activeUser:{
-      //   name: "lital hen",
-      //   email: "lital@gmail.com",
-      //   pwd: "123",
-      //   address:'Hertzel 2',
-      //   communityName:'Ahuzot HaNassi',
-      //   owner:true,
-      //   id:"owner-Ahuzot HaNassi"
-      // },
+      // activeUser:null
+      activeUser:{
+        name: "lital hen",
+        email: "lital@gmail.com",
+        pwd: "123",
+        address:'Hertzel 2',
+        communityName:'Ahuzot HaNassi',
+        owner:true,
+        id:"owner-Ahuzot HaNassi"
+      },
       // activeUser:{
       //   name: "lital",
       //   email: "lital@gmail.com",
@@ -159,7 +159,7 @@ this.setState({
            </DashboardMessages>
            </Route>
            <Route exact path='/dashboard-issues'>
-             <DashboardIssues
+            <DashboardIssues
                activeUser={this.state.activeUser}
                allComments={this.state.comments}
                addComments={this.addComments}
@@ -186,7 +186,27 @@ this.setState({
 
         <Route exact path='/'>
          <HomePage>
-           
+           <h5 className="dashboard">Check New Messages</h5>
+           <DashboardMessages
+              activeUser={this.state.activeUser}
+              allComments={this.state.comments}
+              addComments={this.addComments}
+              addMessage={this.addMessage}
+              allMessages={this.state.messages}
+              deleteMessage={this.deleteMessageOrIssueOrTenant}
+              updateMessage={this.updateMessageOrIssueOrTenant}
+            
+           />
+           <h5 className="dashboard">Check new Issues</h5>
+           <DashboardIssues
+               activeUser={this.state.activeUser}
+               allComments={this.state.comments}
+               addComments={this.addComments}
+               addIssue={this.addIssues}
+               allIssues={this.state.issues}
+               updateIssue={this.updateMessageOrIssueOrTenant}
+               deleteIssue={this.deleteMessageOrIssueOrTenant}
+             />
          </HomePage>
         </Route>
 

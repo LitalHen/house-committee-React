@@ -60,7 +60,8 @@ class DashboardIssues extends React.Component{
     }
 
 render(){
-
+                console.log(this.props);
+                if( ! this.props.activeUser) {return null;}
                const issues=this.props.allIssues.slice().sort((a,b)=>{
                    return ((this.state.sortBy === "priority" ? b.priorityId -a.priorityId:null) || (this.state.sortBy=== '') ||
                              (this.state.sortBy === "date" ? b.date - a.date :null))

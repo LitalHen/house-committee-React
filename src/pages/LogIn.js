@@ -52,8 +52,8 @@ render(){
     return(
         <div className="logIn-img-form">
          
-            <div   className="logIn-img">
-            <img src="https://www.miamiluxuryhomes.com/blog/wp-content/uploads/2014/08/One-Thousand-Museum-Condos-Skyline-View-at-Night.jpg" roundedCircle alt="building picture"></img>
+            <div >
+            <img className="logIn-img" src="https://www.miamiluxuryhomes.com/blog/wp-content/uploads/2014/08/One-Thousand-Museum-Condos-Skyline-View-at-Night.jpg" roundedCircle alt="building picture"></img>
             </div>
             <div className="logIn-form">
             <Form>
