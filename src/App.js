@@ -186,6 +186,7 @@ this.setState({
 
         <Route exact path='/'>
          <HomePage>
+           <h1 className="dashboard-title">Ahuzot HaNassi Building #2</h1>
            <h5 className="dashboard">Check New Messages</h5>
            <DashboardMessages
               activeUser={this.state.activeUser}
