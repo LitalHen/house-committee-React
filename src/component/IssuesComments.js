@@ -164,7 +164,9 @@ render(){
                                 Add comment
                         </Button>
                        </Col>
-                       <Col>
+                       </Row>
+
+                       <Row>
                        <h4>Join Discussion</h4>
                  {
                         
@@ -184,8 +186,7 @@ render(){
 
 
                      }
-                       </Col>
-                      </Row>
+                       </Row>
 
 
                 </Card.Body>

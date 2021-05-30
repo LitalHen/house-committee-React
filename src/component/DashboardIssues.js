@@ -86,7 +86,7 @@ render(){
                          <Col sm={10}>
                          <Form.Group className="group-issue-search">
                        <Form.Control className="select-issue" as="select" value={this.state.sortBy} onChange={(event)=>{this.sortedBy(event.target.value)}}>
-                        <option value="">sorted by</option>
+                        <option value="">sort by</option>
                         <option value="priority">Priority</option>
                         <option value="date">Date</option>
                 </Form.Control> 

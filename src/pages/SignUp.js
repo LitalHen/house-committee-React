@@ -54,10 +54,11 @@ render(){
     return(
         <div className="signup-img-form">
             <div>
-            <img  className="signup-img" src="https://i.pinimg.com/originals/eb/bc/f9/ebbcf97df874668df83e093f3297a4af.jpg" alt="lobby picture"/>
+            <img className="signup-img" src="https://i.pinimg.com/originals/eb/bc/f9/ebbcf97df874668df83e093f3297a4af.jpg" alt="lobby picture"/>
             </div>
             <div className="signup-form">
-                <h3>Sign Up To Your Building</h3>
+                <h1>Welcom to Ahuzot HaNassi Community</h1>
+                <h3>Create Account To Your Building</h3>
     
             <Form>
             <Form.Group controlId="formBasicPassword">

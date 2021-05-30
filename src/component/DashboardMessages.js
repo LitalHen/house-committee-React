@@ -90,7 +90,7 @@ render(){
                   <Col>
                   <Form.Group className="group-message-search">
                 <Form.Control className="select-message" as="select" value={this.state.filter} onChange={(event)=>{this.formInput('filter', event.target.value)}}>
-                        <option value="">fliter messages</option>
+                        <option value="">fliter by priority</option>
                         <option value="important">Important</option>
                         <option value="info">Info</option>
                 </Form.Control> 

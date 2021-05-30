@@ -124,7 +124,7 @@ this.setState({
             >
             </ManagementNavbar>
           </Route>
-          <Container>
+          
           <Route exact path='/login'>
             <LogIn
               buildingUsers={this.state.buildingUsers}
@@ -141,10 +141,7 @@ this.setState({
            >
            </SignUp>
         </Route>
-        <Route exact path='/messages'>
-  
-        </Route>
-        
+        <Container>
         <Route exact path='/dashboard-messages'>
         <DashboardMessages
               activeUser={this.state.activeUser}
@@ -184,9 +181,12 @@ this.setState({
          <LogOut></LogOut>
         </Route>
 
+      </Container>
         <Route exact path='/'>
          <HomePage>
-           <h1 className="dashboard-title">Ahuzot HaNassi Building #2</h1>
+         <h1 className="dashboard-title">Ahuzot HaNassi Building #2</h1>
+           <div className="dashboard-view"> 
+            <div className="col-50">
            <h5 className="dashboard">Check New Messages</h5>
            <DashboardMessages
               activeUser={this.state.activeUser}
@@ -198,6 +198,8 @@ this.setState({
               updateMessage={this.updateMessageOrIssueOrTenant}
             
            />
+           </div>
+           <div  className="col-50">
            <h5 className="dashboard">Check new Issues</h5>
            <DashboardIssues
                activeUser={this.state.activeUser}
@@ -208,10 +210,12 @@ this.setState({
                updateIssue={this.updateMessageOrIssueOrTenant}
                deleteIssue={this.deleteMessageOrIssueOrTenant}
              />
+             </div>
+             </div>
+
          </HomePage>
         </Route>
 
-        </Container>
       </HashRouter>
 
 

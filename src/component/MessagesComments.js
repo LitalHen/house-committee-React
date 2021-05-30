@@ -144,7 +144,8 @@ render(){
                         </Button>
                       
                         </Col>
-                    <Col>
+                        </Row>
+                    <Row>
                     <h4>Join Discussion</h4>
                 {this.props.allComments.filter((comment)=>{
                  // get allComments(json from app) from DashboardMessages and filtered to get the comment for currect message
@@ -163,8 +164,8 @@ render(){
                   
                 }
                 
-                        </Col>
                         </Row>
+                        
                     </Card.Body>
                 </Accordion.Collapse>
             </Card>
